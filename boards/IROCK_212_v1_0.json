@@ -1,0 +1,55 @@
+{
+  "build": {
+    "cpu": "cortex-m0plus",
+    "extra_flags": [
+      "-D STM32L073xx",
+      "-I./lib/IROCK_212_V1_0",
+      "-D IROCK_212_V1_0",
+      "-D ENABLE_HWSERIALLP1"
+    ],
+    "f_cpu": "32000000L",
+    "framework_extra_flags": {
+      "arduino": "-D__CORTEX_SC=0"
+    },
+    "mcu": "stm32l073rbt6",
+    "product_line": "STM32L073xx",
+    "variant": "STM32L0xx/L072R(B-Z)T_L073R(B-Z)T_L083R(B-Z)T"
+  },
+  "debug": {
+    "default_tools": [
+      "stlink"
+    ],
+    "jlink_device": "STM32L073RBT8",
+    "onboard_tools": [
+      "stlink"
+    ],
+    "openocd_target": "stm32l0_dual_bank",
+    "svd_path": "STM32L073.svd"
+  },
+  "frameworks": [
+    "arduino",
+    "cmsis",
+    "mbed",
+    "stm32cube",
+    "libopencm3",
+    "zephyr"
+  ],
+  "platforms": [
+    "ststm32"
+  ],
+  "name": "iRock 212 v1.0.0",
+  "upload": {
+    "maximum_ram_size": 20480,
+    "maximum_size": 131072,
+    "protocol": "stlink",
+    "protocols": [
+      "jlink",
+      "cmsis-dap",
+      "stlink",
+      "blackmagic",
+      "mbed"
+    ]
+  },
+  "url": "dilocker.com",
+  "vendor": "Dilocker Electronics"
+}
