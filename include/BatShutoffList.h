@@ -15,10 +15,9 @@
 // clang-format off
 //                 Name     Warning
 #define BatShutOffTypeList \
-    BatShutOffType(Final,   FINAL) \
-    BatShutOffType(Charge,  CHANGE) \
-    BatShutOffType(Load,    LOAD) \
-    BatShutOffType(Load_Sw, LOAD_SW)
+    BatShutOffType(Ovp,     OVP) \
+    BatShutOffType(Lvp,     LVP) \
+    BatShutOffType(Final,   FINAL)
 // clang-format on
 
 /**
@@ -36,10 +35,14 @@
 // clang-format off
 //                   ID         Type    Mode        Min     Min_Release Max     Max_Release
 #define BatShutOffTriggerList \
-    BatShutOffTrigger(MP_C5,     Charge, MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(MP_C6,     Charge, MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(MP_C7,     Charge, MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(MP_C8,     Charge, MaxCompare, 0,      0,          3.9,    3.65)
+    BatShutOffTrigger(AD_C1,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
+    BatShutOffTrigger(AD_C2,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
+    BatShutOffTrigger(AD_C3,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
+    BatShutOffTrigger(AD_C4,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
+    BatShutOffTrigger(AD_C1,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C2,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C3,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C4,     Lvp,   MinCompare, 2.8,    3.2,        0,      0)
 // clang-format on
 
 /**
@@ -51,13 +54,8 @@
 // clang-format off
 //                  ID              Type        inverted
 #define BatShutOffActorList \
-    BatShutOffActor(C_discon,       Charge,     false) \
-    BatShutOffActor(L_discon,       Final,      false) \
-    BatShutOffActor(C_discon,       Final,      false) \
-    BatShutOffActor(Alarm,          Final,      false) \
-    BatShutOffActor(BU_C5,          Final,      true) \
-    BatShutOffActor(BU_C6,          Final,      true) \
-    BatShutOffActor(BU_C7,          Final,      true) \
-    BatShutOffActor(BU_C8,          Final,      true) \
-    BatShutOffActor(L_discon,       Load,       true)
+    BatShutOffActor(Status_OVP,     Ovp,        false) \
+    BatShutOffActor(LED1,           Ovp,        false) \
+    BatShutOffActor(Status_LVP,     Lvp,        false) \
+    BatShutOffActor(LED2,           Lvp,        true)
 // clang-format on

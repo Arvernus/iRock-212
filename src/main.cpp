@@ -15,6 +15,46 @@ void blink()
   taskManager.scheduleOnce(500, blink);
 }
 
+void driveSSR()
+{
+  if (Signals::GetDigitalValue(Status_LVP))
+  {
+    if (Signals::GetAnalogValue(AD_Shunt) > 1.0)
+    {
+      Signals::SetDigitalValue(SSR_Gate, true);
+    }
+    else
+    {
+      Signals::SetDigitalValue(SSR_Gate, false);
+    }
+  }
+  else if (Signals::GetDigitalValue(Status_OVP))
+  {
+    if (Signals::GetAnalogValue(AD_Shunt) > 1.0)
+    {
+      Signals::SetDigitalValue(SSR_Gate, false);
+    }
+    else
+    {
+      Signals::SetDigitalValue(SSR_Gate, true);
+    }
+  }
+  else
+  {
+    Signals::SetDigitalValue(SSR_Gate, true);
+  }
+  taskManager.scheduleOnce(200, driveSSR);
+}
+
+void debug()
+{
+  // String message = String(Signals::GetAnalogValue(AD_Shunt), 3);
+  String message = String(Pins::ReadAnalog(PinV_GND), 3);
+  //  String message = String(analogRead(PA2));
+  Cli::printInfo(message);
+  taskManager.scheduleOnce(1000, debug);
+}
+
 void setup()
 {
   Cli::setup(115200, true, true, true, true);
@@ -36,6 +76,8 @@ void setup()
   taskManager.yieldForMicros(5 * 1000 * 1000);
   BatShutOff::setup(1000);
   Balancer::setup(10000, 3, 2000);
+  // debug();
+  driveSSR();
 }
 
 void loop()

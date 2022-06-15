@@ -41,19 +41,21 @@
     Pin(PinDip1,            PA15,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 1") \
     Pin(PinDip2,            PC10,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 2") \
     Pin(PinDip3,            PC10,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 3") \
-    Pin(PinAD_C5,           PA2,        AnalogInputPin,             2.0,    0.9,    false,  false,  "Cell 5 voltage") \
-    Pin(PinAD_C6,           PA0,        AnalogInputPin,             2.0,    0.9,    false,  false,  "Cell 6 voltage") \
-    Pin(PinAD_C7,           PC3,        AnalogInputPin,             2.0,    0.9,    false,  false,  "Cell 7 voltage") \
-    Pin(PinAD_C8,           PC2,        AnalogInputPin,             2.0,    0.9,    false,  false,  "Cell 8 voltage") \
-    Pin(PinL_discon,        PA8,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO Load") \
-    Pin(PinC_discon,        PB12,       DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO Charge") \
-    Pin(PinBU_C5,           PB15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 5") \
-    Pin(PinBU_C6,           PB2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 6") \
-    Pin(PinBU_C7,           PH0,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 7") \
-    Pin(PinBU_C8,           PC15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 8") \
+    Pin(PinAD_C1,           PA2,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 5 voltage") \
+    Pin(PinAD_C2,           PA0,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 6 voltage") \
+    Pin(PinAD_C3,           PC3,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 7 voltage") \
+    Pin(PinAD_C4,           PC2,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 8 voltage") \
+    Pin(PinGPO_LVP,         PA8,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO LVP") \
+    Pin(PinGPO_OVP,         PB12,       DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO UVP") \
+    Pin(PinBU_C1,           PB15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 5") \
+    Pin(PinBU_C2,           PB2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 6") \
+    Pin(PinBU_C3,           PH0,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 7") \
+    Pin(PinBU_C4,           PC15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 8") \
     Pin(PinLED1,            PB4,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 1") \
     Pin(PinLED2,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
     Pin(PinLED3,            PD2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
     Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
-    Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground")
+    Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
+    Pin(PinGate1,           PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver (1)") \
+    Pin(PinGate2,           PC14,       DigitalInputPin,            1.0,    0.0,    false,  false,  "Gate Sens (2)")
 // clang-format on
