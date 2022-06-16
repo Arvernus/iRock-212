@@ -47,7 +47,7 @@
   Signal(MapVar,        MappingVariant,   "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Variant of the Mapping Table to use") \
   Signal(CPU_TEMP,      CpuTemp,          "C",  1.0,    0.0,      0,    10,     1000,     true,   false,  "Temperature within the CPU") \
   Signal(VREF_INT,      AnalogIntInput,   "V",  1.0,    0.0,      0,    10,     1000,     false,  false,  "Electric potential of the constant voltage source within the processor") \
-  Signal(AD_Shunt,      AnalogDiffInput,  "A",  31.0,   -0.008,   0,    1,      1,        true,   false,  "Sum of the current running in or out of the battery") \
+  Signal(AD_Shunt,      AnalogDiffInput,  "A",  100.0,  0.0,      0,    1,      1,        true,   false,  "Sum of the current running in or out of the battery") \
   Signal(AD_VGnd,       AnalogInput,      "V",  1.0,    0.0,      0,    10,     1,        true,   false,  "Electric potential of virtual ground") \
   Signal(BU_C1,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
   Signal(BU_C2,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 6 - True means unit is working") \
