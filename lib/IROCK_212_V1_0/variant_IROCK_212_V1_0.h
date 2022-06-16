@@ -124,6 +124,11 @@
 #define PIN_WIRE_SCL PB8
 #endif
 
+// I2C definitions
+#ifndef SERIAL_VE_BUS
+#define SERIAL_VE_BUS SerialLP1
+#endif
+
 // Timer Definitions
 // Use TIM6/TIM7 when possible as servo and tone don't need GPIO output pin
 #ifndef TIMER_TONE
