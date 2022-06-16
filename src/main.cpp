@@ -6,9 +6,6 @@
 #include <BatShutoff.h>
 #include <Balancer.h>
 
-bool mainStatus = true;
-bool swLoadStatus = true;
-
 void blink()
 {
   Signals::SetDigitalValue(LED3, !Signals::GetDigitalValue(LED3));
@@ -19,7 +16,7 @@ void driveSSR()
 {
   if (Signals::GetDigitalValue(Status_LVP))
   {
-    if (Signals::GetAnalogValue(AD_Shunt) > 1.0)
+    if (Signals::GetAnalogValue(AD_Shunt) > 0.001)
     {
       Signals::SetDigitalValue(SSR_Gate, true);
     }
@@ -30,7 +27,7 @@ void driveSSR()
   }
   else if (Signals::GetDigitalValue(Status_OVP))
   {
-    if (Signals::GetAnalogValue(AD_Shunt) > 1.0)
+    if (Signals::GetAnalogValue(AD_Shunt) > 0.001)
     {
       Signals::SetDigitalValue(SSR_Gate, false);
     }
@@ -43,7 +40,7 @@ void driveSSR()
   {
     Signals::SetDigitalValue(SSR_Gate, true);
   }
-  taskManager.scheduleOnce(200, driveSSR);
+  taskManager.scheduleOnce(2000, driveSSR);
 }
 
 void debug()
