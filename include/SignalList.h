@@ -65,10 +65,6 @@
   Signal(Alarm,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  true,   "Output true is for any alarm situation") \
   Signal(ModBus_enable, DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Output to turn on ModBus driver (ADM2483)") \
   Signal(SSR_Gate,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
-  Signal(SSR_Sense,     DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR")
-
-// Signal(L_sw_Switch,  Switch,           "",   1.0,    0.0,    0,    10,     200,      false,  false,  "Button or switch that switches the switched load")
-// Signal(L_Switch,     Switch,           "",   1.0,    0.0,    0,    10,     200,      false,  false,  "Button or switch that switches the load")
-// Signal(L_Button,     Button,           "",   1.0,    0.0,    0,    10,     10,       false,  true,   "Button that changes status of Main")
-
+  Signal(SSR_Sense,     DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
+  Signal(VEBus_Current, VEDirectInput,    "A",  1.0,    0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
 // clang-format on
