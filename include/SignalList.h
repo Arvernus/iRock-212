@@ -65,7 +65,8 @@
   Signal(Status_FinalSO,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Final Shut Off") \
   Signal(Status_OCP,          DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Current Protection") \
   Signal(SSR_Gate,            DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
-  Signal(SSR_Sense,           DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
-  Signal(VEBus_Current,       VEDirectInput,    "A",  1.0,    0.0,      0,    100,    1000,     false,  false,  "Current read from the VE smart Shunt") \
-  Signal(VEBus_Current_S,     VEDirectInput,    "A",  1.0,    0.0,      0,    5,     200,       false,  false,  "Current read from the VE smart Shunt reacting slow")
+  Signal(SSR_Sense,           DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") 
+
+  // Signal(VEBus_Current,       VEDirectInput,    "A",  1.0,    0.0,      0,    100,    1000,     false,  false,  "Current read from the VE smart Shunt") \
+  // Signal(VEBus_Current_S,     VEDirectInput,    "A",  1.0,    0.0,      0,    5,     200,       false,  false,  "Current read from the VE smart Shunt reacting slow")
 // clang-format on
