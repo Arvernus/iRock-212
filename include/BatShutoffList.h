@@ -64,5 +64,7 @@
     BatShutOffActor(Status_OVP,     Ovp,        false) \
     BatShutOffActor(LED1,           Ovp,        false) \
     BatShutOffActor(Status_LVP,     Lvp,        false) \
-    BatShutOffActor(LED2,           Lvp,        true)
+    BatShutOffActor(LED2,           Lvp,        true) \
+    BatShutOffActor(Status_FinalSO, Final,      false) \
+    BatShutOffActor(Status_OCP,     Ocp,        false)
 // clang-format on
