@@ -47,7 +47,8 @@
     BatShutOffTrigger(AD_C1,                Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
     BatShutOffTrigger(AD_C2,                Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
     BatShutOffTrigger(AD_C3,                Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
-    BatShutOffTrigger(AD_C4,                Final, AllCompare, 2.8,    3.5,        4.0,    3.5)
+    BatShutOffTrigger(AD_C4,                Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
+    BatShutOffTrigger(AD_C4,                Ocp, AllCompare, 2.7,    3.5,        4.1,    3.5)
     
     //BatShutOffTrigger(VEBus_Current,        Final, AllCompare, -230.0, 300.0,      230.0,  -300.0) \
     //BatShutOffTrigger(VEBus_Current_S,      Ocp,   AllCompare, -200.0, 300.0,      200.0,  -300.0)
