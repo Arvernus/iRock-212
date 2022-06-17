@@ -18,7 +18,7 @@ void driveSSR()
   {
     Signals::SetDigitalValue(SSR_Gate, false);
   }
-  else if (Signals::GetDigitalValue(Status_LVP) && Signals::GetDigitalValue(Status_LVP))
+  else if (!Signals::GetDigitalValue(Status_LVP) && !Signals::GetDigitalValue(Status_LVP))
   {
     Signals::SetDigitalValue(SSR_Gate, true);
   }
