@@ -14,7 +14,11 @@ void blink()
 
 void driveSSR()
 {
-  if (Signals::GetDigitalValue(Status_LVP) && Signals::GetDigitalValue(Status_LVP))
+  if (Signals::GetDigitalValue(Status_FinalSO) || Signals::GetDigitalValue(Status_OCP))
+  {
+    Signals::SetDigitalValue(SSR_Gate, false);
+  }
+  else if (Signals::GetDigitalValue(Status_LVP) && Signals::GetDigitalValue(Status_LVP))
   {
     Signals::SetDigitalValue(SSR_Gate, true);
   }
