@@ -14,31 +14,23 @@ void blink()
 
 void driveSSR()
 {
-  if (Signals::GetDigitalValue(Status_LVP))
-  {
-    if (Signals::GetAnalogValue(AD_Shunt) > 0.001)
-    {
-      Signals::SetDigitalValue(SSR_Gate, true);
-    }
-    else
-    {
-      Signals::SetDigitalValue(SSR_Gate, false);
-    }
-  }
-  else if (Signals::GetDigitalValue(Status_OVP))
-  {
-    if (Signals::GetAnalogValue(AD_Shunt) > 0.001)
-    {
-      Signals::SetDigitalValue(SSR_Gate, false);
-    }
-    else
-    {
-      Signals::SetDigitalValue(SSR_Gate, true);
-    }
-  }
-  else
+  if (Signals::GetDigitalValue(Status_LVP) && Signals::GetDigitalValue(Status_LVP))
   {
     Signals::SetDigitalValue(SSR_Gate, true);
+  }
+  else if (Signals::GetAnalogValue(AD_Shunt) > 100)
+  {
+    if (Signals::GetDigitalValue(Status_LVP))
+      Signals::SetDigitalValue(SSR_Gate, true);
+    if (Signals::GetDigitalValue(Status_OVP))
+      Signals::SetDigitalValue(SSR_Gate, false);
+  }
+  else if (Signals::GetAnalogValue(AD_Shunt) < 100)
+  {
+    if (Signals::GetDigitalValue(Status_LVP))
+      Signals::SetDigitalValue(SSR_Gate, false);
+    if (Signals::GetDigitalValue(Status_OVP))
+      Signals::SetDigitalValue(SSR_Gate, true);
   }
   taskManager.scheduleOnce(2000, driveSSR);
 }

@@ -7,6 +7,8 @@
  *
  */
 
+#define BALANCER_ACTIVATION_METHOD ((Signals::GetAnalogValue(AD_C1) + Signals::GetAnalogValue(AD_C2) + Signals::GetAnalogValue(AD_C3) + Signals::GetAnalogValue(AD_C4)) > 13.5);
+
 /**
  * @brief list of all signals and their max and mins that will trigger final shut off
  *

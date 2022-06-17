@@ -42,29 +42,30 @@
 * Please define here the list of all Signals
 */
 // clang-format off
-//       SignalName     SignalType        Unit  Gain    Offset    Init  Smooth  Interval  Cal     Generic Description
+//       SignalName       SignalType        Unit  Gain    Offset    Init  Smooth  Interval  Cal     Generic Description
 #define SignalList \
-  Signal(MapVar,        MappingVariant,   "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Variant of the Mapping Table to use") \
-  Signal(CPU_TEMP,      CpuTemp,          "C",  1.0,    0.0,      0,    10,     1000,     true,   false,  "Temperature within the CPU") \
-  Signal(VREF_INT,      AnalogIntInput,   "V",  1.0,    0.0,      0,    10,     1000,     false,  false,  "Electric potential of the constant voltage source within the processor") \
-  Signal(AD_Shunt,      AnalogDiffInput,  "A",  100.0,  0.0,      0,    1,      1,        true,   false,  "Sum of the current running in or out of the battery") \
-  Signal(AD_VGnd,       AnalogInput,      "V",  1.0,    0.0,      0,    10,     1,        true,   false,  "Electric potential of virtual ground") \
-  Signal(BU_C1,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
-  Signal(BU_C2,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 6 - True means unit is working") \
-  Signal(BU_C3,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 7 - True means unit is working") \
-  Signal(BU_C4,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 8 - True means unit is working") \
-  Signal(AD_C1,         AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 5") \
-  Signal(AD_C2,         AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 6") \
-  Signal(AD_C3,         AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 7") \
-  Signal(AD_C4,         AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 8") \
-  Signal(LED1,          DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 1 on PCB") \
-  Signal(LED2,          DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 2 on PCB") \
-  Signal(LED3,          DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 3 on PCB") \
-  Signal(Status_OVP,    DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Disconnects the charger on the PCB - True means charger is disconnected") \
-  Signal(Status_LVP,    DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Disconnects the load on the PCB - True means load is disconnected") \
-  Signal(Alarm,         DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  true,   "Output true is for any alarm situation") \
-  Signal(ModBus_enable, DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Output to turn on ModBus driver (ADM2483)") \
-  Signal(SSR_Gate,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
-  Signal(SSR_Sense,     DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
-  Signal(VEBus_Current, VEDirectInput,    "A",  1.0,    0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
+  Signal(MapVar,          MappingVariant,   "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Variant of the Mapping Table to use") \
+  Signal(CPU_TEMP,        CpuTemp,          "C",  1.0,    0.0,      0,    10,     1000,     true,   false,  "Temperature within the CPU") \
+  Signal(VREF_INT,        AnalogIntInput,   "V",  1.0,    0.0,      0,    10,     1000,     false,  false,  "Electric potential of the constant voltage source within the processor") \
+  Signal(AD_Shunt,        AnalogDiffInput,  "A",  833.0,  -0.006,   0,    10,     10,       true,   false,  "Sum of the current running in or out of the battery") \
+  Signal(AD_Shunt_Slow,   AnalogDiffInput,  "A",  833.0,  -0.006,   0,    5,      200,      true,   false,  "Sum of the current running in or out of the battery") \
+  Signal(AD_VGnd,         AnalogInput,      "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Electric potential of virtual ground") \
+  Signal(BU_C1,           DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
+  Signal(BU_C2,           DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 6 - True means unit is working") \
+  Signal(BU_C3,           DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 7 - True means unit is working") \
+  Signal(BU_C4,           DigitalOutput,    "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 8 - True means unit is working") \
+  Signal(AD_C1,           AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 5") \
+  Signal(AD_C2,           AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 6") \
+  Signal(AD_C3,           AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 7") \
+  Signal(AD_C4,           AnalogInput,      "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 8") \
+  Signal(LED1,            DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 1 on PCB") \
+  Signal(LED2,            DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 2 on PCB") \
+  Signal(LED3,            DigitalOutput,    "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 3 on PCB") \
+  Signal(Status_OVP,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Voltage Protection") \
+  Signal(Status_LVP,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Low Voltage Protection") \
+  Signal(Status_FinalSO,  DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Final Shut Off") \
+  Signal(Status_OCP,      DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Current Protection") \
+  Signal(SSR_Gate,        DigitalOutput,    "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
+  Signal(SSR_Sense,       DigitalInput,     "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
+  Signal(VEBus_Current,   VEDirectInput,    "A",  1.0,    0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
 // clang-format on

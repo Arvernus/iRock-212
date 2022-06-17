@@ -17,7 +17,8 @@
 #define BatShutOffTypeList \
     BatShutOffType(Ovp,     OVP) \
     BatShutOffType(Lvp,     LVP) \
-    BatShutOffType(Final,   FINAL)
+    BatShutOffType(Final,   FINAL) \
+    BatShutOffType(Ocp,     OCP)
 // clang-format on
 
 /**
@@ -33,16 +34,22 @@
  * @param Release if the value of the signal is smaller than Release shut off will return to default
  */
 // clang-format off
-//                   ID         Type    Mode        Min     Min_Release Max     Max_Release
+//                    ID                Type   Mode        Min     Min_Release Max     Max_Release
 #define BatShutOffTriggerList \
-    BatShutOffTrigger(AD_C1,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(AD_C2,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(AD_C3,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(AD_C4,     Ovp,   MaxCompare, 0,      0,          3.9,    3.65) \
-    BatShutOffTrigger(AD_C1,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
-    BatShutOffTrigger(AD_C2,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
-    BatShutOffTrigger(AD_C3,     Lvp,   MinCompare, 2.8,    3.2,        0,      0) \
-    BatShutOffTrigger(AD_C4,     Lvp,   MinCompare, 2.8,    3.2,        0,      0)
+    BatShutOffTrigger(AD_C1,            Ovp,   MaxCompare, 0,      0,          3.8,    3.65) \
+    BatShutOffTrigger(AD_C2,            Ovp,   MaxCompare, 0,      0,          3.8,    3.65) \
+    BatShutOffTrigger(AD_C3,            Ovp,   MaxCompare, 0,      0,          3.8,    3.65) \
+    BatShutOffTrigger(AD_C4,            Ovp,   MaxCompare, 0,      0,          3.8,    3.65) \
+    BatShutOffTrigger(AD_C1,            Lvp,   MinCompare, 2.9,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C2,            Lvp,   MinCompare, 2.9,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C3,            Lvp,   MinCompare, 2.9,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C4,            Lvp,   MinCompare, 2.9,    3.2,        0,      0) \
+    BatShutOffTrigger(AD_C1,            Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
+    BatShutOffTrigger(AD_C2,            Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
+    BatShutOffTrigger(AD_C3,            Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
+    BatShutOffTrigger(AD_C4,            Final, AllCompare, 2.8,    3.5,        4.0,    3.5) \
+    BatShutOffTrigger(AD_Shunt,         Final, AllCompare, -230.0, 300.0,      230.0,  -300.0) \
+    BatShutOffTrigger(AD_Shunt_Slow,    Ocp,   AllCompare, -200.0, 300.0,      200.0,  -300.0)
 // clang-format on
 
 /**
