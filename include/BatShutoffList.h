@@ -70,6 +70,6 @@
     BatShutOffActor(LED2,           Lvp,        true,       0,      false) \
     BatShutOffActor(Status_FinalSO, Final,      false,      0,      false) \
     BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
-    BatShutOffActor(SSR_Gate,       Ovp,        true,      180,    true) \
-    BatShutOffActor(SSR_Gate,       Lvp,        true,      180,    true)
+    BatShutOffActor(SSR_Gate,       Ovp,        true,      180,     true) \
+    BatShutOffActor(SSR_Gate,       Lvp,        true,      180,     true)
 // clang-format on
