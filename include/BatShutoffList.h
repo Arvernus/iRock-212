@@ -13,12 +13,12 @@
  * @param Name name of the shutoff type
  */
 // clang-format off
-//                 Name     Warning
+//                 Name     Warning Final
 #define BatShutOffTypeList \
-    BatShutOffType(Ovp,     OVP) \
-    BatShutOffType(Lvp,     LVP) \
-    BatShutOffType(Final,   FINAL) \
-    BatShutOffType(Ocp,     OCP)
+    BatShutOffType(Ovp,     OVP,    false) \
+    BatShutOffType(Lvp,     LVP,    false) \
+    BatShutOffType(Final,   FINAL,  true) \
+    BatShutOffType(Ocp,     OCP,    false)
 // clang-format on
 
 /**
@@ -44,11 +44,10 @@
     BatShutOffTrigger(AD_C2,            Lvp,    MinCompare, 2.9,    3.2,        0,      0) \
     BatShutOffTrigger(AD_C3,            Lvp,    MinCompare, 2.9,    3.2,        0,      0) \
     BatShutOffTrigger(AD_C4,            Lvp,    MinCompare, 2.9,    3.2,        0,      0) \
-    BatShutOffTrigger(AD_C1,            Final,  AllCompare, 2.8,    3.5,        4.0,    3.5) \
-    BatShutOffTrigger(AD_C2,            Final,  AllCompare, 2.8,    3.5,        4.0,    3.5) \
-    BatShutOffTrigger(AD_C3,            Final,  AllCompare, 2.8,    3.5,        4.0,    3.5) \
-    BatShutOffTrigger(AD_C4,            Final,  AllCompare, 2.8,    3.5,        4.0,    3.5) \
-    BatShutOffTrigger(AD_C4,            Ocp,    AllCompare, 2.7,    3.5,        4.1,    3.5)
+    BatShutOffTrigger(AD_C1,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
+    BatShutOffTrigger(AD_C2,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
+    BatShutOffTrigger(AD_C3,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
+    BatShutOffTrigger(AD_C4,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0)
     
     //BatShutOffTrigger(VEBus_Current,        Final, AllCompare, -230.0, 300.0,      230.0,  -300.0) \
     //BatShutOffTrigger(VEBus_Current_S,      Ocp,   AllCompare, -200.0, 300.0,      200.0,  -300.0)
@@ -59,14 +58,18 @@
  * @param SignalID signal id of the Signal
  * @param ShutOffType defines the type of shut off
  * @param inverted is signal inverted
+ * @param Lock time in s to lock the Actor after change
+ * @param isSSR defines if Actor is a Solid state relay
  */
 // clang-format off
-//                  ID              Type        inverted
+//                  ID              Type        inverted    Lock    isSSR
 #define BatShutOffActorList \
-    BatShutOffActor(Status_OVP,     Ovp,        false) \
-    BatShutOffActor(LED1,           Ovp,        false) \
-    BatShutOffActor(Status_LVP,     Lvp,        false) \
-    BatShutOffActor(LED2,           Lvp,        true) \
-    BatShutOffActor(Status_FinalSO, Final,      false) \
-    BatShutOffActor(Status_OCP,     Ocp,        false)
+    BatShutOffActor(Status_OVP,     Ovp,        false,      0,      false) \
+    BatShutOffActor(LED1,           Ovp,        false,      0,      false) \
+    BatShutOffActor(Status_LVP,     Lvp,        false,      0,      false) \
+    BatShutOffActor(LED2,           Lvp,        true,       0,      false) \
+    BatShutOffActor(Status_FinalSO, Final,      false,      0,      false) \
+    BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
+    BatShutOffActor(SSR_Gate,       Ovp,        true,      180,    true) \
+    BatShutOffActor(SSR_Gate,       Lvp,        true,      180,    true)
 // clang-format on

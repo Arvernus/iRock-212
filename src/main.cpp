@@ -8,13 +8,16 @@
 
 void blink()
 {
+  unsigned int time = 1000;
+  if (Signals::GetDigitalValue(Status_FinalSO))
+    time = 100;
   Signals::SetDigitalValue(LED3, !Signals::GetDigitalValue(LED3));
-  taskManager.scheduleOnce(500, blink);
+  taskManager.scheduleOnce(time, blink);
 }
 
 void driveSSR()
 {
-  if (Signals::GetDigitalValue(Status_FinalSO) || Signals::GetDigitalValue(Status_OCP))
+  /* if (Signals::GetDigitalValue(Status_FinalSO) || Signals::GetDigitalValue(Status_OCP))
   {
     Signals::SetDigitalValue(SSR_Gate, false);
   }
@@ -22,6 +25,10 @@ void driveSSR()
   {
     Signals::SetDigitalValue(SSR_Gate, true);
   }
+  // else if ()
+  //{
+  // }
+
   else if (Signals::GetAnalogValue(AD_Shunt) > 100)
   {
     if (Signals::GetDigitalValue(Status_LVP))
@@ -35,7 +42,7 @@ void driveSSR()
       Signals::SetDigitalValue(SSR_Gate, false);
     if (Signals::GetDigitalValue(Status_OVP))
       Signals::SetDigitalValue(SSR_Gate, true);
-  }
+  } */
   taskManager.scheduleOnce(2000, driveSSR);
 }
 
