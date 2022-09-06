@@ -1,0 +1,15 @@
+{
+    "name": "IROCK_212_V1_1",
+    "version": "1.0.0",
+    "description": "Hardware declaration of iRock 212 V1.1",
+    "authors": [
+        {
+            "name": "Joscha Wagner",
+            "email": "joscha@nebensound.com",
+            "maintainer": true
+        }
+    ],
+    "frameworks": "arduino",
+    "dependencies": [],
+    "platforms": "ststm32"
+}

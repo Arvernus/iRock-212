@@ -46,7 +46,7 @@
     Pin(PinDip1,            PA15,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 1") \
     Pin(PinDip2,            PC10,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 2") \
     Pin(PinDip3,            PC10,       DigitalInputPullUpPin,      1.0,    0.0,    true,   false,  "Dip switch 3") \
-    Pin(PinAD_C1,           PA2,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 5 voltage") \
+    Pin(PinAD_C1,           PA1,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 5 voltage") \
     Pin(PinAD_C2,           PA0,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 6 voltage") \
     Pin(PinAD_C3,           PC3,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 7 voltage") \
     Pin(PinAD_C4,           PC2,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 8 voltage") \
@@ -59,10 +59,11 @@
     Pin(PinLED1,            PB4,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 1") \
     Pin(PinLED2,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
     Pin(PinLED3,            PD2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
+    Pin(PinPowersave,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersave") \
     Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
-    Pin(PinGate1,           PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver (1)") \
-    Pin(PinGate2,           PC14,       DigitalInputPin,            1.0,    0.0,    false,  false,  "Gate Sens (2)") \
+    Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
+    Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
     Pin(PinVE_Current,      VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt") \
     Pin(PinVE_Current_S,    VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt smoothed")
 // clang-format on
