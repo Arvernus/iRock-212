@@ -39,5 +39,5 @@
     MapPin(0,   Status_LVP,         PinGPO_LVP) \
     MapPin(0,   PSU_Gate,           PinGatePSU) \
     MapPin(0,   SSR_Gate,           PinGate) \
-    MapPin(0,   Powersave,          PinPowersave)
+    MapPin(0,   Powersafe,          PinPowersafe)
 // clang-format on

@@ -69,7 +69,8 @@
     BatShutOffActor(Status_LVP,     Lvp,        false,      0,      false) \
     BatShutOffActor(LED2,           Lvp,        true,       0,      false) \
     BatShutOffActor(Status_FinalSO, Final,      false,      0,      false) \
-    BatShutOffActor(PSU_Gate,       Final,      false,      0,      false) \
+    BatShutOffActor(Powersafe,      Final,      false,      0,      false) \
+    BatShutOffActor(PSU_Gate,       Final,      true,       0,      false) \
     BatShutOffActor(SSR_Gate,       Final,      true,       0,      false) \
     BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
     BatShutOffActor(SSR_Gate,       Ovp,        true,       1000,    true) \
