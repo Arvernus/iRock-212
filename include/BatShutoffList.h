@@ -26,10 +26,10 @@
  *
  * @param SignalID signal id of the Signal
  * @param ShutOffType defines the type of shut off
- * @param Mode  0 = no comparison
- *              1 = min
- *              2 = max
- *              3 = min and max
+ * @param Mode  0 = NoCompare   = no comparison
+ *              1 = MinCompare  = min
+ *              2 = MaxCompare  = max
+ *              3 = AllCompare  = min and max
  * @param Max if the value of the signal is bigger than Max shut off will trigger
  * @param Release if the value of the signal is smaller than Release shut off will return to default
  */
@@ -58,7 +58,7 @@
  * @param SignalID signal id of the Signal
  * @param ShutOffType defines the type of shut off
  * @param inverted is signal inverted
- * @param Lock time in s to lock the Actor after change
+ * @param Lock time in s to lock the Actor after change in ms
  * @param isSSR defines if Actor is a Solid state relay
  */
 // clang-format off
@@ -69,7 +69,10 @@
     BatShutOffActor(Status_LVP,     Lvp,        false,      0,      false) \
     BatShutOffActor(LED2,           Lvp,        true,       0,      false) \
     BatShutOffActor(Status_FinalSO, Final,      false,      0,      false) \
+    BatShutOffActor(Powersafe,      Final,      false,      0,      false) \
+    BatShutOffActor(PSU_Gate,       Final,      true,       0,      false) \
+    BatShutOffActor(SSR_Gate,       Final,      true,       0,      false) \
     BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
-    BatShutOffActor(SSR_Gate,       Ovp,        true,      180,     true) \
-    BatShutOffActor(SSR_Gate,       Lvp,        true,      180,     true)
+    BatShutOffActor(SSR_Gate,       Ovp,        true,       1000,    true) \
+    BatShutOffActor(SSR_Gate,       Lvp,        true,       1000,    true)
 // clang-format on

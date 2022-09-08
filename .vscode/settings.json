@@ -2,5 +2,10 @@
     "files.associations": {
         "*.yaml": "home-assistant",
         "algorithm": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "Joscha",
+        "Nebensound",
+        "VREF"
+    ]
 }
