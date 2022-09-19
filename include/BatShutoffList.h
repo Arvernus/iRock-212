@@ -73,6 +73,6 @@
     BatShutOffActor(PSU_Gate,       Final,      true,       0,      false) \
     BatShutOffActor(SSR_Switch,     Final,      true,       0,      false) \
     BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
-    BatShutOffActor(SSR_Switch_Ovp, Ovp,        true,       1000,    false) \
-    BatShutOffActor(SSR_Switch_Lvp, Lvp,        true,       1000,    false)
+    BatShutOffActor(SSR_Switch_Ovp, Ovp,        true,       1000,   false) \
+    BatShutOffActor(SSR_Switch_Lvp, Lvp,        true,       1000,   false)
 // clang-format on
