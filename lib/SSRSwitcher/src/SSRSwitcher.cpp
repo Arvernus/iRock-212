@@ -128,7 +128,7 @@ void SSRSwitcherTimeHandler::exec()
     {
         if (SSR == SSRSwitcherSwitchs[i].SSR)
         {
-            Compare::compare_result compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOnLimit);
+            Compare::compare_result compare_result;
             bool thisTrigger;
             switch (outputStatus)
             {
@@ -137,6 +137,7 @@ void SSRSwitcherTimeHandler::exec()
                 taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
                 break;
             case SSRSwitcher::waiting:
+                compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOffLimit);
                 switch (SSRSwitcherSwitchs[i].shuntOffLimit.mode)
                 {
                 case Compare::MaxCompare:
@@ -168,6 +169,7 @@ void SSRSwitcherTimeHandler::exec()
                 }
                 break;
             case SSRSwitcher::testing:
+                compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOnLimit);
                 switch (SSRSwitcherSwitchs[SSR].shuntOffLimit.mode)
                 {
                 case Compare::MaxCompare:
@@ -217,27 +219,9 @@ void SSRSwitcherTimeHandler::exec()
 }
 void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus)
 {
-    switch (newStatus)
-    {
-    case SSRSwitcher::open:
-        outputStatus = newStatus;
-        if (Signals::GetDigitalValue(SSRSwitcherIds[SSR].SignalIdSwitch))
-        {
-            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, !SSRSwitcherIds[SSR].inverted);
-        }
-        else
-        {
-            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, SSRSwitcherIds[SSR].inverted);
-        }
-
-        break;
-
-    default:
-        taskManager.cancelTask(taskId);
-        outputStatus = newStatus;
-        taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
-        break;
-    }
+    taskManager.cancelTask(taskId);
+    outputStatus = newStatus;
+    taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
 }
 SSRSwitcher::OutputStatus SSRSwitcherTimeHandler::getStatus()
 {
