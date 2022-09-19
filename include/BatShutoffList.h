@@ -62,17 +62,17 @@
  * @param isSSR defines if Actor is a Solid state relay
  */
 // clang-format off
-//                  ID              Type        inverted    Lock    isSSR
+//                  ID              Type        inverted
 #define BatShutOffActorList \
-    BatShutOffActor(Status_OVP,     Ovp,        false,      0,      false) \
-    BatShutOffActor(LED1,           Ovp,        false,      0,      false) \
-    BatShutOffActor(Status_LVP,     Lvp,        false,      0,      false) \
-    BatShutOffActor(LED2,           Lvp,        true,       0,      false) \
-    BatShutOffActor(Status_FinalSO, Final,      false,      0,      false) \
-    BatShutOffActor(Powersafe,      Final,      false,      0,      false) \
-    BatShutOffActor(PSU_Gate,       Final,      true,       0,      false) \
-    BatShutOffActor(SSR_Switch,     Final,      true,       0,      false) \
-    BatShutOffActor(Status_OCP,     Ocp,        false,      0,      false) \
-    BatShutOffActor(SSR_Switch_Ovp, Ovp,        true,       1000,   false) \
-    BatShutOffActor(SSR_Switch_Lvp, Lvp,        true,       1000,   false)
+    BatShutOffActor(Status_OVP,     Ovp,        false) \
+    BatShutOffActor(LED1,           Ovp,        false) \
+    BatShutOffActor(Status_LVP,     Lvp,        false) \
+    BatShutOffActor(LED2,           Lvp,        true) \
+    BatShutOffActor(Status_FinalSO, Final,      false) \
+    BatShutOffActor(Powersafe,      Final,      false) \
+    BatShutOffActor(PSU_Gate,       Final,      true) \
+    BatShutOffActor(SSR_Switch,     Final,      true) \
+    BatShutOffActor(Status_OCP,     Ocp,        false) \
+    BatShutOffActor(SSR_Switch_Ovp, Ovp,        true) \
+    BatShutOffActor(SSR_Switch_Lvp, Lvp,        true)
 // clang-format on
