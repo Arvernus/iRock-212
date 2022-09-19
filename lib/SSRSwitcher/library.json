@@ -1,0 +1,24 @@
+{
+  "name": "SSRSwitcher",
+  "version": "0.0.1",
+  "description": "Manages the Status of a SSR",
+  "authors": [
+    {
+      "name": "Joscha Wagner",
+      "email": "joscha@nebensound.com",
+      "maintainer": true
+    }
+  ],
+  "dependencies": {
+    "MappingIO": "https://github.com/Arvernus/MappingIO.git",
+    "CLI": "https://github.com/Arvernus/CLI.git",
+    "BatShutOff": "https://github.com/Arvernus/BatShutOff.git"
+  },
+  "frameworks": "*",
+  "platforms": "*",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arvernus/SSRSwitcher.git"
+  },
+  "homepage": "https://github.com/Arvernus/SSRSwitcher/releases/latest/download/SSRSwitcher.tar.gz"
+}
