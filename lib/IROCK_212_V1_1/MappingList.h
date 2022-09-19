@@ -22,7 +22,6 @@
     MapPin(0,   MapVar,             PinDip3) \
     MapPin(0,   MapVar,             PinDip2) \
     MapPin(0,   MapVar,             PinDip1) \
-    MapPin(0,   Shunt,              PinShunt) \
     MapPin(0,   AD_Shunt,           PinShunt) \
     MapPin(0,   AD_Shunt,           PinV_GND) \
     MapPin(0,   AD_VGnd,            PinV_GND) \
