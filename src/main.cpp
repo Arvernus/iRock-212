@@ -5,6 +5,7 @@
 #include <CLI.h>
 #include <BatShutoff.h>
 #include <Balancer.h>
+#include <SSRSwitcher.h>
 
 void blink()
 {
@@ -36,6 +37,7 @@ void setup()
   taskManager.yieldForMicros(5 * 1000 * 1000);
   BatShutOff::setup(1000);
   Balancer::setup(10000, 3, 2000);
+  SSRSwitcher::setup(1000);
 }
 
 void loop()
