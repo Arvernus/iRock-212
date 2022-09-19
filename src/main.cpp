@@ -35,9 +35,9 @@ void setup()
   greet = greet + Mapping::ActualMap();
   Cli::start(greet);
   taskManager.yieldForMicros(5 * 1000 * 1000);
+  SSRSwitcher::setup(1000);
   BatShutOff::setup(1000);
   Balancer::setup(10000, 3, 2000);
-  SSRSwitcher::setup(1000);
 }
 
 void loop()
