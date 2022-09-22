@@ -161,7 +161,7 @@ SSRSwitcherTimeHandler::~SSRSwitcherTimeHandler()
 void SSRSwitcherTimeHandler::init()
 {
     outputStatus = SSRSwitcher::closed;
-    SSRSwitcherTask->evaluate(SSR);
+    SSRSwitcherTask->evaluate(SSR, true);
 }
 
 /**
