@@ -18,6 +18,7 @@ namespace SSRSwitcher
     typedef enum
     {
         open,
+        closed,
         newStatus,
         waiting,
         testing
