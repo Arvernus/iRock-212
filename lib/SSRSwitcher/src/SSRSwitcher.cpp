@@ -44,26 +44,32 @@ struct SSRSwitcherSwitchData
 SSRSwitcherSwitchData SSRSwitcherSwitchs[] = {SSRSwitcherSwitchList};
 #undef SSRSwitcherSwitch
 
+/**
+ * @brief The Handler that evaltuates the mode of the SSR
+ *
+ */
 class SSRSwitcherHandler : public Executable
 {
 private:
     bool lastStatus[NoSSRSwitcher];
 
 public:
-    SSRSwitcherHandler(/* args */);
-    ~SSRSwitcherHandler();
     void exec();
     void evaluate(SSRSwitcherId Id, bool init = false);
     bool input[sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData)];
 };
 static SSRSwitcherHandler *SSRSwitcherTask = new SSRSwitcherHandler();
 
+/**
+ * @brief Handler that handesl the actions of the various SSRs
+ *
+ */
 class SSRSwitcherTimeHandler : public Executable
 {
 private:
     SSRSwitcherId SSR;
     SSRSwitcher::OutputStatus outputStatus;
-    unsigned int taskId;
+    taskid_t taskId;
     SSRSwitcherSwitchData *Trigger;
 
 public:
@@ -77,14 +83,10 @@ public:
 };
 static SSRSwitcherTimeHandler *SSRSwitcherTimeTask[NoSSRSwitcher];
 
-SSRSwitcherHandler::SSRSwitcherHandler(/* args */)
-{
-}
-
-SSRSwitcherHandler::~SSRSwitcherHandler()
-{
-}
-
+/**
+ * @brief Execute function of the Handler the goes trow all SSRs and evaluates ther mode.
+ *
+ */
 void SSRSwitcherHandler::exec()
 {
 
@@ -93,6 +95,13 @@ void SSRSwitcherHandler::exec()
         evaluate(i);
     }
 }
+
+/**
+ * @brief Evaluatest all Switchsignals of a given SSR to set its mode.
+ *
+ * @param Id SSR
+ * @param init flag for initial run
+ */
 void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
 {
 
@@ -124,6 +133,11 @@ void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
     lastStatus[Id] = testing;
 }
 
+/**
+ * @brief Construct a new SSRSwitcherTimeHandler::SSRSwitcherTimeHandler object
+ *
+ * @param Id The assinged SSR. CAUTION only ever start a single Handler per SSR.
+ */
 SSRSwitcherTimeHandler::SSRSwitcherTimeHandler(SSRSwitcherId Id)
 {
     SSR = Id;
@@ -131,17 +145,29 @@ SSRSwitcherTimeHandler::SSRSwitcherTimeHandler(SSRSwitcherId Id)
     SSRSwitcherTimeHandler::init();
 }
 
+/**
+ * @brief Destroy the SSRSwitcherTimeHandler::SSRSwitcherTimeHandler object
+ *
+ */
 SSRSwitcherTimeHandler::~SSRSwitcherTimeHandler()
 {
     taskManager.cancelTask(taskId);
 }
 
+/**
+ * @brief initiallises the SSRSwitcherTimeHandler
+ *
+ */
 void SSRSwitcherTimeHandler::init()
 {
     outputStatus = SSRSwitcher::closed;
     SSRSwitcherTask->evaluate(SSR);
 }
 
+/**
+ * @brief depending on the status in will turn on or off SSR and change mode.
+ *
+ */
 void SSRSwitcherTimeHandler::exec()
 {
     Compare::compare_result compare_result;
@@ -187,6 +213,13 @@ void SSRSwitcherTimeHandler::exec()
         break;
     }
 }
+
+/**
+ * @brief set a new status for the SSR
+ *
+ * @param newStatus status to be used
+ * @param time how long til the nex transitiuon
+ */
 void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsigned int time)
 {
     taskManager.cancelTask(taskId);
@@ -215,16 +248,32 @@ void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsi
     outputStatus = newStatus;
     taskId = taskManager.scheduleOnce(time, SSRSwitcherTimeTask[SSR]);
 }
+
+/**
+ * @brief set a new trigger
+ *
+ * @param input the given trigger
+ */
 void SSRSwitcherTimeHandler::setTrigger(SSRSwitcherSwitchData *input)
 {
     Trigger = input;
 }
 
+/**
+ * @brief get the current status of the SSR
+ *
+ * @return SSRSwitcher::OutputStatus
+ */
 SSRSwitcher::OutputStatus SSRSwitcherTimeHandler::getStatus()
 {
     return outputStatus;
 }
 
+/**
+ * @brief setup of SSRSwitcher module
+ *
+ * @param interval intervall in ms the inputs should be evaluated
+ */
 void SSRSwitcher::setup(unsigned int interval)
 {
     for (SSRSwitcherId Id = (SSRSwitcherId)0; Id < NoSSRSwitcher; Id = (SSRSwitcherId)((unsigned int)Id + 1))
