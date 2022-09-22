@@ -203,11 +203,11 @@ void SSRSwitcherTimeHandler::exec()
             case SSRSwitcher::open:
                 if (Signals::GetDigitalValue(SSRSwitcherIds[SSR].SignalIdSwitch))
                 {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
                 }
                 else
                 {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 }
 
                 break;
