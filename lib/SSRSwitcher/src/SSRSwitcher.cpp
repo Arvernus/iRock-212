@@ -102,7 +102,7 @@ void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
         bool input = !Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == Id;
         if (input)
         {
-            SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j], init);
+            SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j]);
         }
         testing = testing || input;
     }
