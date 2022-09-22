@@ -19,7 +19,7 @@ namespace SSRSwitcher
     {
         open,
         closed,
-        newStatus,
+        shutoff,
         waiting,
         testing
     } OutputStatus;
