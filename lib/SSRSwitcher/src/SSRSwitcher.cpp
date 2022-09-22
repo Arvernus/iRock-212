@@ -147,12 +147,10 @@ void SSRSwitcherTimeHandler::exec()
     switch (outputStatus)
     {
     case SSRSwitcher::shutoff:
-        Cli::printInfo("SSRSwitcher: Change to Status shutoff");
         Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
         setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
         break;
     case SSRSwitcher::waiting:
-        Cli::printInfo("SSRSwitcher: Change to Status waiting");
         compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOffLimit);
         if (compare_result.trigger)
         {
@@ -165,7 +163,6 @@ void SSRSwitcherTimeHandler::exec()
         }
         break;
     case SSRSwitcher::testing:
-        Cli::printInfo("SSRSwitcher: Change to Status testing");
         compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOnLimit);
         if (compare_result.trigger)
         {
@@ -178,15 +175,12 @@ void SSRSwitcherTimeHandler::exec()
         }
         break;
     case SSRSwitcher::open:
-        Cli::printInfo("SSRSwitcher: Change to Status open");
         Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
         break;
     case SSRSwitcher::closed:
-        Cli::printInfo("SSRSwitcher: Change to Status closed");
         Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
         break;
     default:
-        Cli::printInfo("SSRSwitcher: Error no Status");
         Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
         break;
     }
@@ -194,8 +188,30 @@ void SSRSwitcherTimeHandler::exec()
 void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsigned int time)
 {
     taskManager.cancelTask(taskId);
-    outputStatus = newStatus;
     taskId = taskManager.scheduleOnce(time, SSRSwitcherTimeTask[SSR]);
+    if (outputStatus != newStatus)
+        switch (newStatus)
+        {
+        case SSRSwitcher::shutoff:
+            Cli::printInfo("SSRSwitcher: Change to Status shutoff");
+            break;
+        case SSRSwitcher::waiting:
+            Cli::printInfo("SSRSwitcher: Change to Status waiting");
+            break;
+        case SSRSwitcher::testing:
+            Cli::printInfo("SSRSwitcher: Change to Status testing");
+            break;
+        case SSRSwitcher::open:
+            Cli::printInfo("SSRSwitcher: Change to Status open");
+            break;
+        case SSRSwitcher::closed:
+            Cli::printInfo("SSRSwitcher: Change to Status closed");
+            break;
+        default:
+            Cli::printInfo("SSRSwitcher: Error no Status");
+            break;
+        }
+    outputStatus = newStatus;
 }
 void SSRSwitcherTimeHandler::setTrigger(SSRSwitcherSwitchData *input)
 {
