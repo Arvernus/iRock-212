@@ -4,6 +4,7 @@
 #include <MappingIO.h>
 #include <Compare.h>
 #include <BatShutOff.h>
+#include <CLI.h>
 
 #ifndef SSRSWITCHER_SIGNAL_LIST
 #define SSRSWITCHER_SIGNAL_LIST "SSRSwitcherSignalTest.h"
@@ -133,10 +134,12 @@ void SSRSwitcherTimeHandler::exec()
             switch (outputStatus)
             {
             case SSRSwitcher::newStatus:
+                Cli::printInfo("SSRSwitcher: Change to Status New Status");
                 outputStatus = SSRSwitcher::waiting;
                 taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
                 break;
             case SSRSwitcher::waiting:
+                Cli::printInfo("SSRSwitcher: Change to Status waiting");
                 compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOffLimit);
                 switch (SSRSwitcherSwitchs[i].shuntOffLimit.mode)
                 {
@@ -169,6 +172,7 @@ void SSRSwitcherTimeHandler::exec()
                 }
                 break;
             case SSRSwitcher::testing:
+                Cli::printInfo("SSRSwitcher: Change to Status testing");
                 compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOnLimit);
                 switch (SSRSwitcherSwitchs[SSR].shuntOffLimit.mode)
                 {
@@ -201,6 +205,7 @@ void SSRSwitcherTimeHandler::exec()
                 }
                 break;
             case SSRSwitcher::open:
+                Cli::printInfo("SSRSwitcher: Change to Status open");
                 if (Signals::GetDigitalValue(SSRSwitcherIds[SSR].SignalIdSwitch))
                 {
                     Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
