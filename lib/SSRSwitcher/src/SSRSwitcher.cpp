@@ -47,7 +47,7 @@ SSRSwitcherSwitchData SSRSwitcherSwitchs[] = {SSRSwitcherSwitchList};
 class SSRSwitcherHandler : public Executable
 {
 private:
-    bool lastStatus;
+    bool lastStatus = false;
 
 public:
     SSRSwitcherHandler(/* args */);
@@ -63,13 +63,15 @@ private:
     SSRSwitcherId SSR;
     SSRSwitcher::OutputStatus outputStatus;
     unsigned int taskId;
+    SSRSwitcherSwitchData *Trigger;
 
 public:
     SSRSwitcherTimeHandler(SSRSwitcherId Id);
     ~SSRSwitcherTimeHandler();
     void init();
     void exec();
-    void setStatus(SSRSwitcher::OutputStatus newStatus);
+    void setStatus(SSRSwitcher::OutputStatus newStatus, unsigned int time = 2);
+    void setTrigger(SSRSwitcherSwitchData *input);
     SSRSwitcher::OutputStatus getStatus();
 };
 static SSRSwitcherTimeHandler *SSRSwitcherTimeTask[NoSSRSwitcher];
@@ -118,117 +120,121 @@ SSRSwitcherTimeHandler::SSRSwitcherTimeHandler(SSRSwitcherId Id)
 {
     SSR = Id;
     SSRSwitcherTimeTask[Id] = this;
-    outputStatus = SSRSwitcher::open;
-    taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
+    SSRSwitcherTimeHandler::init();
 }
 
 SSRSwitcherTimeHandler::~SSRSwitcherTimeHandler()
 {
+    taskManager.cancelTask(taskId);
 }
+
+void SSRSwitcherTimeHandler::init()
+{
+    outputStatus = SSRSwitcher::closed;
+    taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
+    Trigger = &SSRSwitcherSwitchs[0];
+}
+
 void SSRSwitcherTimeHandler::exec()
 {
-    for (size_t i = 0; i < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); i++)
+    Compare::compare_result compare_result;
+    bool thisTrigger;
+    switch (outputStatus)
     {
-        if (SSR == SSRSwitcherSwitchs[i].SSR)
+    case SSRSwitcher::newStatus:
+        Cli::printInfo("SSRSwitcher: Change to Status New Status");
+        Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
+        setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
+        break;
+    case SSRSwitcher::waiting:
+        Cli::printInfo("SSRSwitcher: Change to Status waiting");
+        compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOffLimit);
+        switch (Trigger->shuntOffLimit.mode)
         {
-            Compare::compare_result compare_result;
-            bool thisTrigger;
-            switch (outputStatus)
-            {
-            case SSRSwitcher::newStatus:
-                Cli::printInfo("SSRSwitcher: Change to Status New Status");
-                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
-                outputStatus = SSRSwitcher::waiting;
-                taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
-                break;
-            case SSRSwitcher::waiting:
-                Cli::printInfo("SSRSwitcher: Change to Status waiting");
-                compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOffLimit);
-                switch (SSRSwitcherSwitchs[i].shuntOffLimit.mode)
-                {
-                case Compare::MaxCompare:
-                    if (compare_result.max.trigger)
-                        thisTrigger = true;
-                    break;
-                case Compare::MinCompare:
-                    if (compare_result.min.trigger)
-                        thisTrigger = true;
-                    break;
-                case Compare::AllCompare:
-                    if (compare_result.min.trigger || compare_result.max.trigger)
-                        thisTrigger = true;
-                    break;
+        case Compare::MaxCompare:
+            if (compare_result.max.trigger)
+                thisTrigger = true;
+            break;
+        case Compare::MinCompare:
+            if (compare_result.min.trigger)
+                thisTrigger = true;
+            break;
+        case Compare::AllCompare:
+            if (compare_result.min.trigger || compare_result.max.trigger)
+                thisTrigger = true;
+            break;
 
-                default:
-                    thisTrigger = false;
-                    break;
-                }
-                if (thisTrigger)
-                {
-                    outputStatus = SSRSwitcher::testing;
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
-                    taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].ActiveTime, SSRSwitcherTimeTask[SSR]);
-                }
-                else
-                {
-                    taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
-                }
-                break;
-            case SSRSwitcher::testing:
-                Cli::printInfo("SSRSwitcher: Change to Status testing");
-                compare_result = Compare::calc<float>(Signals::GetAnalogValue(SSRSwitcherSwitchs[i].shunt), SSRSwitcherSwitchs[i].shuntOnLimit);
-                switch (SSRSwitcherSwitchs[SSR].shuntOffLimit.mode)
-                {
-                case Compare::MaxCompare:
-                    if (compare_result.max.trigger)
-                        thisTrigger = true;
-                    break;
-                case Compare::MinCompare:
-                    if (compare_result.min.trigger)
-                        thisTrigger = true;
-                    break;
-                case Compare::AllCompare:
-                    if (compare_result.min.trigger || compare_result.max.trigger)
-                        thisTrigger = true;
-                    break;
-
-                default:
-                    thisTrigger = false;
-                    break;
-                }
-                if (thisTrigger)
-                {
-                    taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
-                }
-                else
-                {
-                    outputStatus = SSRSwitcher::waiting;
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
-                    taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
-                }
-                break;
-            case SSRSwitcher::open:
-                Cli::printInfo("SSRSwitcher: Change to Status open");
-                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
-                break;
-            case SSRSwitcher::closed:
-                Cli::printInfo("SSRSwitcher: Change to Status closed");
-                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
-                break;
-            default:
-                Cli::printInfo("SSRSwitcher: Error no Status");
-                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
-                break;
-            }
+        default:
+            thisTrigger = false;
+            break;
         }
+        if (thisTrigger)
+        {
+            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+            setStatus(SSRSwitcher::testing, Trigger->ActiveTime);
+        }
+        else
+        {
+            setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
+        }
+        break;
+    case SSRSwitcher::testing:
+        Cli::printInfo("SSRSwitcher: Change to Status testing");
+        compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOnLimit);
+        switch (SSRSwitcherSwitchs[SSR].shuntOffLimit.mode)
+        {
+        case Compare::MaxCompare:
+            if (compare_result.max.trigger)
+                thisTrigger = true;
+            break;
+        case Compare::MinCompare:
+            if (compare_result.min.trigger)
+                thisTrigger = true;
+            break;
+        case Compare::AllCompare:
+            if (compare_result.min.trigger || compare_result.max.trigger)
+                thisTrigger = true;
+            break;
+
+        default:
+            thisTrigger = false;
+            break;
+        }
+        if (thisTrigger)
+        {
+            setStatus(SSRSwitcher::testing, Trigger->HoldTime);
+        }
+        else
+        {
+            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+            setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
+        }
+        break;
+    case SSRSwitcher::open:
+        Cli::printInfo("SSRSwitcher: Change to Status open");
+        Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+        break;
+    case SSRSwitcher::closed:
+        Cli::printInfo("SSRSwitcher: Change to Status closed");
+        Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
+        break;
+    default:
+        Cli::printInfo("SSRSwitcher: Error no Status");
+        Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
+        break;
     }
 }
-void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus)
+void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsigned int time)
 {
     taskManager.cancelTask(taskId);
     outputStatus = newStatus;
-    taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
+    taskId = taskManager.scheduleOnce(time, SSRSwitcherTimeTask[SSR]);
 }
+void SSRSwitcherTimeHandler::setTrigger(SSRSwitcherSwitchData *input)
+{
+    Trigger = input;
+}
+
 SSRSwitcher::OutputStatus SSRSwitcherTimeHandler::getStatus()
 {
     return outputStatus;
