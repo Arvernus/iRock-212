@@ -198,7 +198,7 @@ void SSRSwitcherTimeHandler::exec()
         }
         if (compare_result.release)
         {
-            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+            Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
             setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
         }
         break;
