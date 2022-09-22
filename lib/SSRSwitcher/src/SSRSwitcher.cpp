@@ -39,8 +39,8 @@ struct SSRSwitcherSwitchData
     const Compare::Limit<float> shuntOffLimit;
     const Compare::Limit<float> shuntOnLimit;
 };
-#define SSRSwitcherSwitch(SSRSwitcherId, SignalIdSwitch, ActiveTime, HoldTime, Shunt, CompareType, MaxOff, MinOff, MaxOn, MinOn) \
-    {SSRSwitcherId, SignalIdSwitch, ActiveTime, HoldTime, Shunt, {(Compare::LimitMode)Compare::CompareType, MaxOff, MaxOff, MinOff, MinOff}, {(Compare::LimitMode)Compare::CompareType, MaxOn, MaxOn, MinOn, MinOn}},
+#define SSRSwitcherSwitch(SSRSwitcherId, SignalIdSwitch, ActiveTime, HoldTime, Shunt, CompareType, MinMaxOff, ReleaseOff, MinMaxOn, ReleaseOn) \
+    {SSRSwitcherId, SignalIdSwitch, ActiveTime, HoldTime, Shunt, {(Compare::LimitMode)Compare::CompareType, MinMaxOff, ReleaseOff, MinMaxOff, ReleaseOff}, {(Compare::LimitMode)Compare::CompareType, MinMaxOn, ReleaseOn, MinMaxOn, ReleaseOn}},
 SSRSwitcherSwitchData SSRSwitcherSwitchs[] = {SSRSwitcherSwitchList};
 #undef SSRSwitcherSwitch
 
@@ -94,13 +94,18 @@ void SSRSwitcherHandler::exec()
             bool testing = false;
             for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
             {
+                if (!Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input))
+                {
+                    SSRSwitcherTimeTask[i]->setTrigger(&SSRSwitcherSwitchs[j]);
+                }
+
                 testing = testing || (!Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == i);
             }
             if (testing != lastStatus)
             {
                 if (testing)
                 {
-                    SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::newStatus);
+                    SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::shutoff);
                 }
                 else
                 {
@@ -141,39 +146,20 @@ void SSRSwitcherTimeHandler::exec()
     bool thisTrigger;
     switch (outputStatus)
     {
-    case SSRSwitcher::newStatus:
-        Cli::printInfo("SSRSwitcher: Change to Status New Status");
+    case SSRSwitcher::shutoff:
+        Cli::printInfo("SSRSwitcher: Change to Status shutoff");
         Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
         setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
         break;
     case SSRSwitcher::waiting:
         Cli::printInfo("SSRSwitcher: Change to Status waiting");
         compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOffLimit);
-        switch (Trigger->shuntOffLimit.mode)
-        {
-        case Compare::MaxCompare:
-            if (compare_result.max.trigger)
-                thisTrigger = true;
-            break;
-        case Compare::MinCompare:
-            if (compare_result.min.trigger)
-                thisTrigger = true;
-            break;
-        case Compare::AllCompare:
-            if (compare_result.min.trigger || compare_result.max.trigger)
-                thisTrigger = true;
-            break;
-
-        default:
-            thisTrigger = false;
-            break;
-        }
-        if (thisTrigger)
+        if (compare_result.trigger)
         {
             Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
             setStatus(SSRSwitcher::testing, Trigger->ActiveTime);
         }
-        else
+        if (compare_result.release)
         {
             setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
         }
@@ -181,30 +167,11 @@ void SSRSwitcherTimeHandler::exec()
     case SSRSwitcher::testing:
         Cli::printInfo("SSRSwitcher: Change to Status testing");
         compare_result = Compare::calc<float>(Signals::GetAnalogValue(Trigger->shunt), Trigger->shuntOnLimit);
-        switch (SSRSwitcherSwitchs[SSR].shuntOffLimit.mode)
-        {
-        case Compare::MaxCompare:
-            if (compare_result.max.trigger)
-                thisTrigger = true;
-            break;
-        case Compare::MinCompare:
-            if (compare_result.min.trigger)
-                thisTrigger = true;
-            break;
-        case Compare::AllCompare:
-            if (compare_result.min.trigger || compare_result.max.trigger)
-                thisTrigger = true;
-            break;
-
-        default:
-            thisTrigger = false;
-            break;
-        }
-        if (thisTrigger)
+        if (compare_result.trigger)
         {
             setStatus(SSRSwitcher::testing, Trigger->HoldTime);
         }
-        else
+        if (compare_result.release)
         {
             Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
             setStatus(SSRSwitcher::waiting, Trigger->HoldTime);
