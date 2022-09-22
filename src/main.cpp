@@ -35,8 +35,11 @@ void setup()
   greet = greet + Mapping::ActualMap();
   Cli::start(greet);
   taskManager.yieldForMicros(5 * 1000 * 1000);
+  // Cli::printInfo((String)Signals::GetDigitalValue(SSR_Switch));
   SSRSwitcher::setup(1000);
+  // Cli::printInfo((String)Signals::GetDigitalValue(SSR_Switch));
   BatShutOff::setup(1000);
+  // Cli::printInfo((String)Signals::GetDigitalValue(SSR_Switch));
   Balancer::setup(10000, 3, 2000);
 }
 

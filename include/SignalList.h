@@ -66,9 +66,9 @@
   Signal(Status_FinalSO,      VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Final Shut Off") \
   Signal(Status_OCP,          VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Current Protection") \
   Signal(SSR_Gate,            DigitalOutput,        "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
-  Signal(SSR_Switch,          DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
-  Signal(SSR_Switch_Ovp,      DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
-  Signal(SSR_Switch_Lvp,      DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
+  Signal(SSR_Switch,          VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
+  Signal(SSR_Switch_Ovp,      VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
+  Signal(SSR_Switch_Lvp,      VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
   Signal(SSR_Sense,           DigitalInput,         "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
   Signal(PSU_Gate,            DigitalOutput,        "",   1.0,    0.0,      1,    10,     200,      false,  false,  "Driver PSU") \
   Signal(Powersafe,           DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Turn on Powersafe")
