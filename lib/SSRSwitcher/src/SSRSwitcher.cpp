@@ -135,6 +135,7 @@ void SSRSwitcherTimeHandler::exec()
             {
             case SSRSwitcher::newStatus:
                 Cli::printInfo("SSRSwitcher: Change to Status New Status");
+                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 outputStatus = SSRSwitcher::waiting;
                 taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
                 break;
