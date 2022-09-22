@@ -53,6 +53,7 @@ public:
     SSRSwitcherHandler(/* args */);
     ~SSRSwitcherHandler();
     void exec();
+    void evaluate(SSRSwitcherId Id);
     bool input[sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData)];
 };
 static SSRSwitcherHandler *SSRSwitcherTask = new SSRSwitcherHandler();
@@ -89,36 +90,38 @@ void SSRSwitcherHandler::exec()
 
     for (SSRSwitcherId i = (SSRSwitcherId)0; i < NoSSRSwitcher; i = (SSRSwitcherId)((unsigned int)i + 1))
     {
-        if (SSRSwitcherIds[i].SignalIdSwitch)
-        {
-            bool testing = false;
-            for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
-            {
-                if (!Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input))
-                {
-                    SSRSwitcherTimeTask[i]->setTrigger(&SSRSwitcherSwitchs[j]);
-                }
+        evaluate(i);
+    }
+}
+void SSRSwitcherHandler::evaluate(SSRSwitcherId Id)
+{
 
-                testing = testing || (!Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == i);
-            }
-            if (testing != lastStatus)
-            {
-                if (testing)
-                {
-                    SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::shutoff);
-                }
-                else
-                {
-                    SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::open);
-                }
-            }
-            lastStatus = testing;
+    bool testing = false; // true is logic working
+    for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
+    {
+        bool input = !Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == Id;
+        if (input)
+        {
+            SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j]);
+        }
+        testing = testing || input;
+    }
+    if (testing != lastStatus)
+    {
+        if (testing)
+        {
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::shutoff);
+        }
+        else if (SSRSwitcherIds[Id].SignalIdSwitch)
+        {
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::open);
         }
         else
         {
-            SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::closed);
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::closed);
         }
     }
+    lastStatus = testing;
 }
 
 SSRSwitcherTimeHandler::SSRSwitcherTimeHandler(SSRSwitcherId Id)
@@ -188,7 +191,6 @@ void SSRSwitcherTimeHandler::exec()
 void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsigned int time)
 {
     taskManager.cancelTask(taskId);
-    taskId = taskManager.scheduleOnce(time, SSRSwitcherTimeTask[SSR]);
     if (outputStatus != newStatus)
         switch (newStatus)
         {
@@ -212,6 +214,7 @@ void SSRSwitcherTimeHandler::setStatus(SSRSwitcher::OutputStatus newStatus, unsi
             break;
         }
     outputStatus = newStatus;
+    taskId = taskManager.scheduleOnce(time, SSRSwitcherTimeTask[SSR]);
 }
 void SSRSwitcherTimeHandler::setTrigger(SSRSwitcherSwitchData *input)
 {
