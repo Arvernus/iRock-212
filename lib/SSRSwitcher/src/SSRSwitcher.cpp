@@ -10,7 +10,7 @@
 #endif // SSRSWITCHER_SIGNAL_LIST
 #include SSRSWITCHER_SIGNAL_LIST
 
-#define SSRSwitcherId(Name, SignalIdActor, SignalIdSwitch, inverted) Name,
+#define SSRSwitcherId(Name, SignalIdActor, SignalIdSwitch) Name,
 typedef enum
 {
     SSRSwitcherIdList
@@ -21,11 +21,11 @@ struct SSRSwitcherIdData
 {
     Signals::SignalId SignalIdActor;
     Signals::SignalId SignalIdSwitch;
-    bool inverted;
+    String Name;
 };
-#define SSRSwitcherId(Name, SignalIdActor, SignalIdSwitch, inverted) \
-    {SignalIdActor, SignalIdSwitch, inverted},
-SSRSwitcherIdData SSRSwitcherIds[] = {SSRSwitcherIdList};
+#define SSRSwitcherId(Name, SignalIdActor, SignalIdSwitch) \
+    {SignalIdActor, SignalIdSwitch, #Name},
+static SSRSwitcherIdData SSRSwitcherIds[] = {SSRSwitcherIdList};
 #undef SSRSwitcherId
 
 struct SSRSwitcherSwitchData
@@ -106,7 +106,7 @@ void SSRSwitcherHandler::exec()
         }
         else
         {
-            Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, SSRSwitcherIds[i].inverted);
+            Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, false);
         }
     }
 }
@@ -160,7 +160,7 @@ void SSRSwitcherTimeHandler::exec()
                 if (thisTrigger)
                 {
                     outputStatus = SSRSwitcher::testing;
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, !SSRSwitcherIds[SSR].inverted);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
                     taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].ActiveTime, SSRSwitcherTimeTask[SSR]);
                 }
                 else
@@ -196,18 +196,18 @@ void SSRSwitcherTimeHandler::exec()
                 else
                 {
                     outputStatus = SSRSwitcher::waiting;
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, SSRSwitcherIds[SSR].inverted);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
                     taskId = taskManager.scheduleOnce(SSRSwitcherSwitchs[i].HoldTime, SSRSwitcherTimeTask[SSR]);
                 }
                 break;
             case SSRSwitcher::open:
                 if (Signals::GetDigitalValue(SSRSwitcherIds[SSR].SignalIdSwitch))
                 {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, !SSRSwitcherIds[SSR].inverted);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 }
                 else
                 {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, SSRSwitcherIds[SSR].inverted);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 }
 
                 break;

@@ -13,9 +13,9 @@
  * @param Name name of the SSR
  */
 // clang-format off
-//                Name      SignalIdActor   SignalIdSwitch  inverted
+//                Name      SignalIdActor   SignalIdSwitch
 #define SSRSwitcherIdList \
-    SSRSwitcherId(SSR1,     SSR_Gate,       SSR_Switch,     false)
+    SSRSwitcherId(SSR1,     SSR_Gate,       SSR_Switch)
 // clang-format on
 
 // clang-format off
