@@ -106,7 +106,7 @@ void SSRSwitcherHandler::exec()
         }
         else
         {
-            Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, true);
+            Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, false);
         }
     }
 }
@@ -207,7 +207,7 @@ void SSRSwitcherTimeHandler::exec()
                 }
                 else
                 {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
+                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
                 }
 
                 break;
