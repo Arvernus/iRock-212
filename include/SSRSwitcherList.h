@@ -21,6 +21,6 @@
 // clang-format off
 //                    SSRSwitcherId SignalIdSwitch  ActiveTime  HoldTime    Shunt       CompareType MaxOff  MinOff  MaxOn   MinOn
 #define SSRSwitcherSwitchList \
-    SSRSwitcherSwitch(SSR1,         SSR_Switch_Ovp, 10000,      2000,       AD_Shunt,   MinCompare, -1,     -1,     -0.01,  -0.01) \
-    SSRSwitcherSwitch(SSR1,         SSR_Switch_Lvp, 10000,      2000,       AD_Shunt,   MaxCompare, 1,      1,      0.01,   0.01)
+    SSRSwitcherSwitch(SSR1,         SSR_Switch_Ovp, 10000,      2000,       AD_Shunt,   AllCompare, -1,     -1,     -0.01,  -0.01) \
+    SSRSwitcherSwitch(SSR1,         SSR_Switch_Lvp, 10000,      2000,       AD_Shunt,   AllCompare, 1,      1,      0.01,   0.01)
 // clang-format on
