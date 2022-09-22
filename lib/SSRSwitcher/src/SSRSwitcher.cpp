@@ -104,7 +104,7 @@ void SSRSwitcherHandler::exec()
  */
 void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
 {
-    if (SSRSwitcherIds[Id].SignalIdSwitch)
+    if (Signals::GetDigitalValue(SSRSwitcherIds[Id].SignalIdSwitch))
     {
         bool testing = false; // true is logic working
         for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
