@@ -47,6 +47,8 @@ SSRSwitcherSwitchData SSRSwitcherSwitchs[] = {SSRSwitcherSwitchList};
 class SSRSwitcherHandler : public Executable
 {
 private:
+    bool lastStatus;
+
 public:
     SSRSwitcherHandler(/* args */);
     ~SSRSwitcherHandler();
@@ -82,32 +84,32 @@ SSRSwitcherHandler::~SSRSwitcherHandler()
 
 void SSRSwitcherHandler::exec()
 {
+
     for (SSRSwitcherId i = (SSRSwitcherId)0; i < NoSSRSwitcher; i = (SSRSwitcherId)((unsigned int)i + 1))
     {
-        if (Signals::GetDigitalValue(SSRSwitcherIds[i].SignalIdSwitch))
+        if (SSRSwitcherIds[i].SignalIdSwitch)
         {
             bool testing = false;
             for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
             {
-                testing = testing || !Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input);
+                testing = testing || (!Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == i);
             }
-            if (!testing == (SSRSwitcherTimeTask[i]->getStatus() == SSRSwitcher::open))
+            if (testing != lastStatus)
             {
                 if (testing)
                 {
                     SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::newStatus);
-                    // SSRSwitcherHandler::running(i);
                 }
                 else
                 {
                     SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::open);
-                    // Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, !SSRSwitcherIds[i].inverted);
                 }
             }
+            lastStatus = testing;
         }
         else
         {
-            Signals::SetDigitalValue(SSRSwitcherIds[i].SignalIdActor, false);
+            SSRSwitcherTimeTask[i]->setStatus(SSRSwitcher::closed);
         }
     }
 }
@@ -207,17 +209,15 @@ void SSRSwitcherTimeHandler::exec()
                 break;
             case SSRSwitcher::open:
                 Cli::printInfo("SSRSwitcher: Change to Status open");
-                if (Signals::GetDigitalValue(SSRSwitcherIds[SSR].SignalIdSwitch))
-                {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
-                }
-                else
-                {
-                    Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
-                }
-
+                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, true);
+                break;
+            case SSRSwitcher::closed:
+                Cli::printInfo("SSRSwitcher: Change to Status closed");
+                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 break;
             default:
+                Cli::printInfo("SSRSwitcher: Error no Status");
+                Signals::SetDigitalValue(SSRSwitcherIds[SSR].SignalIdActor, false);
                 break;
             }
         }
