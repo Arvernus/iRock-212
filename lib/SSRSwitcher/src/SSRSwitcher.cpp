@@ -47,13 +47,13 @@ SSRSwitcherSwitchData SSRSwitcherSwitchs[] = {SSRSwitcherSwitchList};
 class SSRSwitcherHandler : public Executable
 {
 private:
-    bool lastStatus = false;
+    bool lastStatus[NoSSRSwitcher];
 
 public:
     SSRSwitcherHandler(/* args */);
     ~SSRSwitcherHandler();
     void exec();
-    void evaluate(SSRSwitcherId Id);
+    void evaluate(SSRSwitcherId Id, bool init = false);
     bool input[sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData)];
 };
 static SSRSwitcherHandler *SSRSwitcherTask = new SSRSwitcherHandler();
@@ -93,7 +93,7 @@ void SSRSwitcherHandler::exec()
         evaluate(i);
     }
 }
-void SSRSwitcherHandler::evaluate(SSRSwitcherId Id)
+void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
 {
 
     bool testing = false; // true is logic working
@@ -102,26 +102,26 @@ void SSRSwitcherHandler::evaluate(SSRSwitcherId Id)
         bool input = !Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == Id;
         if (input)
         {
-            SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j]);
+            SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j], init);
         }
         testing = testing || input;
     }
-    if (testing != lastStatus)
+    if (testing != lastStatus[Id] || init)
     {
         if (testing)
         {
-            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::shutoff);
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::shutoff, init);
         }
         else if (SSRSwitcherIds[Id].SignalIdSwitch)
         {
-            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::open);
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::open, init);
         }
         else
         {
-            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::closed);
+            SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::closed, init);
         }
     }
-    lastStatus = testing;
+    lastStatus[Id] = testing;
 }
 
 SSRSwitcherTimeHandler::SSRSwitcherTimeHandler(SSRSwitcherId Id)
@@ -139,8 +139,7 @@ SSRSwitcherTimeHandler::~SSRSwitcherTimeHandler()
 void SSRSwitcherTimeHandler::init()
 {
     outputStatus = SSRSwitcher::closed;
-    taskId = taskManager.execute(SSRSwitcherTimeTask[SSR]);
-    Trigger = &SSRSwitcherSwitchs[0];
+    SSRSwitcherTask->evaluate(SSR);
 }
 
 void SSRSwitcherTimeHandler::exec()
