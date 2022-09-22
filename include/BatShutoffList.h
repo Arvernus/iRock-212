@@ -47,10 +47,8 @@
     BatShutOffTrigger(AD_C1,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
     BatShutOffTrigger(AD_C2,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
     BatShutOffTrigger(AD_C3,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
-    BatShutOffTrigger(AD_C4,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0)
-    
-    //BatShutOffTrigger(VEBus_Current,        Final, AllCompare, -230.0, 300.0,      230.0,  -300.0) \
-    //BatShutOffTrigger(VEBus_Current_S,      Ocp,   AllCompare, -200.0, 300.0,      200.0,  -300.0)
+    BatShutOffTrigger(AD_C4,            Final,  AllCompare, 2.8,    2.8,        4.0,    4.0) \
+    BatShutOffTrigger(VEBus_Current,    Final,  AllCompare, -220.0, 300.0,      220.0,  -300.0)
 // clang-format on
 
 /**
