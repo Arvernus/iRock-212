@@ -104,6 +104,40 @@ void SSRSwitcherHandler::exec()
  */
 void SSRSwitcherHandler::evaluate(SSRSwitcherId Id, bool init)
 {
+    if (SSRSwitcherIds[Id].SignalIdSwitch)
+    {
+
+        bool testing = false; // true is logic working
+        for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
+        {
+            bool input = !Signals::GetDigitalValue(SSRSwitcherSwitchs[j].Input) && SSRSwitcherSwitchs[j].SSR == Id;
+            if (input)
+            {
+                SSRSwitcherTimeTask[Id]->setTrigger(&SSRSwitcherSwitchs[j]);
+            }
+            testing = testing || input;
+        }
+        if (testing != lastStatus[Id] || init)
+        {
+            if (testing)
+            {
+                SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::shutoff, init);
+            }
+            else if (SSRSwitcherIds[Id].SignalIdSwitch)
+            {
+                SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::open, init);
+            }
+            else
+            {
+                SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::closed, init);
+            }
+        }
+        lastStatus[Id] = testing;
+    }
+    else
+    {
+        SSRSwitcherTimeTask[Id]->setStatus(SSRSwitcher::closed, init);
+    }
 
     bool testing = false; // true is logic working
     for (size_t j = 0; j < sizeof(SSRSwitcherSwitchs) / sizeof(SSRSwitcherSwitchData); j++)
