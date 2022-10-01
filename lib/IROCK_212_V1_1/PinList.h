@@ -8,7 +8,7 @@
 
 // I2C definitions
 #ifndef SERIAL_VE_BUS
-#define SERIAL_VE_BUS Serial2
+#define SERIAL_VE_BUS SerialLP1
 #endif
 
 /*
