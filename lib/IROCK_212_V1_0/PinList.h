@@ -8,7 +8,7 @@
 
 // I2C definitions
 #ifndef SERIAL_VE_BUS
-#define SERIAL_VE_BUS SerialLP1
+#define SERIAL_VE_BUS Serial2
 #endif
 
 /*
@@ -63,6 +63,5 @@
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate1,           PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver (1)") \
     Pin(PinGate2,           PC14,       DigitalInputPin,            1.0,    0.0,    false,  false,  "Gate Sens (2)") \
-    Pin(PinVE_Current,      VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt") \
-    Pin(PinVE_Current_S,    VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt smoothed")
+    Pin(PinVE_Current,      VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt")
 // clang-format on
