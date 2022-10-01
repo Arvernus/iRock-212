@@ -10,7 +10,7 @@
  *
  *******************************************************************************
  */
-#if defined(ARDUINO_IROCK_212_V1_0)
+#ifdef ARDUINO_IROCK_212_V1_0
 #include "pins_arduino.h"
 
 // Pin number
@@ -93,7 +93,7 @@ const uint32_t analogInputPin[] = {
 #ifdef __cplusplus
 extern "C"
 {
-#endif
+#endif /* __cplusplus */
 
   /**
    * @brief  System Clock Configuration
@@ -152,10 +152,10 @@ extern "C"
   {
     Error_Handler();
   }
-#endif
+#endif /* USBCON */
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
-#endif /* ARDUINO_IROCK_V2_3 */
+#endif /* ARDUINO_IROCK_212_V1_0 */

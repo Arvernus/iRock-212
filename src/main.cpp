@@ -7,6 +7,14 @@
 #include <Balancer.h>
 #include <SSRSwitcher.h>
 
+#if defined(ARDUINO_IROCK_212_V1_0)
+HardwareSerial Serial2(USART2);
+#endif
+
+#if defined(ARDUINO_IROCK_212_V1_1)
+HardwareSerial Serial2(USART2);
+#endif
+
 void blink()
 {
   unsigned int time = 1000;
