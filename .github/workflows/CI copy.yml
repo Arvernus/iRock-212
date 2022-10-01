@@ -1,0 +1,126 @@
+name: CI
+
+jobs:
+  setup:
+    name: Setup CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get version
+        id: version
+        uses: paulhatch/semantic-version@v4.0.3
+        with:
+          search_commit_body: true
+          branch: origin/main
+      - name: get version of file
+        id: version_file
+        run: echo "::set-output name=existingVersion::$(grep "#define SW_VERSION" include/main.h | cut -c20-200)"
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Cache PlatformIO
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+      - name: Get default environments
+        id: envs
+        run: |
+          echo "::set-output name=environments::$(pio project config --json-output | jq -cr '.[0][1][0][1]')"
+    outputs:
+      environments: ${{ steps.envs.outputs.environments }}
+      version_tag: ${{ steps.version.outputs.version_tag }}
+      version: ${{ steps.version.outputs.version }}
+      old_version: ${{ steps.version_file.outputs.existingVersion }}
+      up_version: ${{ steps.version.outputs.version != steps.version_file.outputs.existingVersion}}
+
+  up_version:
+    if: ${{needs.setup.outputs.up_version}}
+    name: Up Version in lib file
+    runs-on: ubuntu-latest
+    needs: [setup]
+    steps:
+      - run: echo ${{needs.setup.outputs.up_version}}
+      - uses: actions/checkout@v2
+      - name: Set Version
+        run: sed -i s/${{ needs.setup.outputs.old_version }}/${{ needs.setup.outputs.version }}/g include/main.h
+
+  build:
+    name: Build ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: ${{ fromJSON(needs.setup.outputs.environments) }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Version
+        run: sed -i s/DEVELOPERVERSION/${{ needs.setup.outputs.version }}/g include/main.h
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Cache PlatformIO
+        uses: actions/cache@v2
+        with:
+          path: ~/.platformio
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install PlatformIO
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade platformio
+      - name: Define Softwareversion
+        run: export PLATFORMIO_BUILD_FLAGS="-D SW_VERSION=1.0.0"
+      - name: Run PlatformIO
+        run: pio run -e ${{ matrix.environment }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.environment }}
+          path: |
+            .pio/build/${{ matrix.environment }}/firmware.elf
+            .pio/build/${{ matrix.environment }}/firmware.bin
+          if-no-files-found: error
+  test:
+    name: Test Builds
+    runs-on: ubuntu-latest
+    needs: [setup, build]
+    steps:
+      - uses: actions/download-artifact@v2
+
+  release:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.event.pull_request.base.ref =='main'
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [setup, build, test]
+    steps:
+      - uses: actions/download-artifact@v2
+      - name: Create draft release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          tag_name: ${{ needs.setup.outputs.version }}
+          files: |
+            *
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
