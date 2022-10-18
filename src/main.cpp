@@ -7,7 +7,7 @@ HardwareSerial Serial5(PD2, PC12);
 void blink()
 {
   digitalWrite(PB4, !digitalRead(PB4));
-  // Serial.println("turn");
+  Serial5.println("turn");
 }
 
 void setup()
