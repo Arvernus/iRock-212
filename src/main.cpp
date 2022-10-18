@@ -7,7 +7,7 @@ HardwareSerial Serial5(PD2, PC12);
 void blink()
 {
   digitalWrite(PB4, !digitalRead(PB4));
-  Serial5.println("turn");
+  Serial5.println("The quick brown fox jumps over the lazy dog.");
 }
 
 void setup()
@@ -15,7 +15,7 @@ void setup()
   pinMode(PB4, OUTPUT);
   taskManager.scheduleFixedRate(1000, blink);
   Serial.begin(115200);
-  Serial5.begin(4800);
+  Serial5.begin(115200);
 }
 
 void loop()
