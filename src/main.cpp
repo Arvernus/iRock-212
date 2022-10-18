@@ -4,16 +4,27 @@
 
 void blink()
 {
-  digitalWrite(!digitalRead(PinLED1));
+  digitalWrite(PB4, !digitalRead(PB4));
+  Serial.println("turn");
 }
 
 void setup()
 {
-  pinMode(PinLED1, OUTPUT);
+  pinMode(PB4, OUTPUT);
   taskManager.scheduleFixedRate(1000, blink);
+  Serial.begin(115200);
+  Serial5.begin(115200);
 }
 
 void loop()
 {
   taskManager.runLoop();
+  if (Serial.available())
+  {                               // If anything comes in Serial (USB),
+    Serial5.write(Serial.read()); // read it and send it out Serial1 (pins 0 & 1)
+  }
+  if (Serial5.available())
+  {                               // If anything comes in Serial1 (pins 0 & 1)
+    Serial.write(Serial5.read()); // read it and send it out Serial (USB)
+  }
 }
