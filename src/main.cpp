@@ -20,7 +20,7 @@ void setup()
 
 void loop()
 {
-  // taskManager.runLoop();
+  taskManager.runLoop();
   if (Serial.available())
   {                               // If anything comes in Serial (USB),
     Serial5.write(Serial.read()); // read it and send it out Serial1 (pins 0 & 1)
