@@ -15,7 +15,7 @@ void setup()
   pinMode(PB4, OUTPUT);
   taskManager.scheduleFixedRate(1000, blink);
   Serial.begin(115200);
-  Serial5.begin(115200);
+  Serial5.begin(9600);
 }
 
 void loop()
