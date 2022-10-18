@@ -2,6 +2,8 @@
 #include <Arduino.h>
 #include <TaskManager.h>
 
+HardwareSerial Serial5(PD2, PC12);
+
 void blink()
 {
   digitalWrite(PB4, !digitalRead(PB4));
@@ -11,7 +13,7 @@ void blink()
 void setup()
 {
   pinMode(PB4, OUTPUT);
-  // taskManager.scheduleFixedRate(1000, blink);
+  taskManager.scheduleFixedRate(1000, blink);
   Serial.begin(115200);
   Serial5.begin(115200);
 }
