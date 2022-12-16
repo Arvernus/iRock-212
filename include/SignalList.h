@@ -47,7 +47,7 @@
   Signal(MapVar,              MappingVariant,       "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Variant of the Mapping Table to use") \
   Signal(CPU_TEMP,            CpuTemp,              "C",  1.0,    0.0,      0,    10,     1000,     true,   false,  "Temperature within the CPU") \
   Signal(VREF_INT,            AnalogIntInput,       "V",  1.0,    0.0,      0,    10,     1000,     false,  false,  "Electric potential of the constant voltage source within the processor") \
-  Signal(AD_Shunt,            AnalogDiffInput,      "A",  833.0,  -0.006,   0,    10,     10,       true,   false,  "Sum of the current running in or out of the battery") \
+  Signal(AD_Shunt,            AnalogDiffInput,      "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Sum of the current running in or out of the battery") \
   Signal(Shunt,               DigitalInput,         "",   1.0,    0.0,      0,    10,     10,       false,  false,  "Status of charging") \
   Signal(AD_VGnd,             AnalogInput,          "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Electric potential of virtual ground") \
   Signal(BU_C1,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
@@ -66,7 +66,11 @@
   Signal(Status_FinalSO,      VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Final Shut Off") \
   Signal(Status_OCP,          VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Current Protection") \
   Signal(SSR_Gate,            DigitalOutput,        "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
+  Signal(SSR_Switch,          VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
+  Signal(SSR_Switch_Ovp,      VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
+  Signal(SSR_Switch_Lvp,      VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
   Signal(SSR_Sense,           DigitalInput,         "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
   Signal(PSU_Gate,            DigitalOutput,        "",   1.0,    0.0,      1,    10,     200,      false,  false,  "Driver PSU") \
-  Signal(Powersafe,           DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Turn on Powersafe")
+  Signal(Powersafe,           DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Turn on Powersafe") \
+  Signal(VEBus_Current,       VEDirectInput,        "A",  1.0,    0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
 // clang-format on

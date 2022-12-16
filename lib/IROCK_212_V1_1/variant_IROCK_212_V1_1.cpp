@@ -10,7 +10,7 @@
  *
  *******************************************************************************
  */
-#if defined(ARDUINO_IROCK_212_V1_1)
+#ifdef ARDUINO_IROCK_212_V1_1
 #include "pins_arduino.h"
 
 // Pin number

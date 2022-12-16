@@ -137,6 +137,7 @@
 #ifndef SERIAL_UART_INSTANCE
 #define SERIAL_UART_INSTANCE 1 // Connected to ST-Link
 #endif
+#define ENABLE_HWSERIAL2
 
 // Default pin used for 'Serial' instance (ex: ST-Link)
 // Mandatory for Firmata
