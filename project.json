@@ -1,0 +1,15 @@
+{
+  "name": "IROCK_212",
+  "version": "0.0.1",
+  "description": "iRock OS for Hardware 212",
+  "authors": [
+    {
+      "name": "Joscha Wagner",
+      "email": "joscha@nebensound.com",
+      "maintainer": true
+    },
+    {
+      "name": "Andreas Wagner"
+    }
+  ]
+}
