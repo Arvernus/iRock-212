@@ -1,46 +1,32 @@
 #include "main.h"
 #include <Arduino.h>
 #include <TaskManager.h>
-#include <MappingIO.h>
-#include <CLI.h>
-#include <BatShutoff.h>
-#include <Balancer.h>
-#include <SSRSwitcher.h>
+
+HardwareSerial Serial5(PD2, PC12);
 
 void blink()
 {
-  unsigned int time = 1000;
-  if (Signals::GetDigitalValue(Status_FinalSO))
-    time = 100;
-  Signals::SetDigitalValue(LED3, !Signals::GetDigitalValue(LED3));
-  taskManager.scheduleOnce(time, blink);
+  digitalWrite(PB4, !digitalRead(PB4));
+  Serial5.println("The quick brown fox jumps over the lazy dog.");
 }
 
 void setup()
 {
-  Cli::setup(115200, true, true, true, true);
-  Signals::Init();
-  // ModBus::setup();
-  blink();
-  String greet;
-  greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
-#define stringer(s) #s
-#define str(s) stringer(s)
-  greet = greet + str(SW_VERSION);
-  greet = greet + " on your iRock 212 ";
-  greet = greet + str(HW_VERSION);
-#undef str
-#undef stringer
-  greet = greet + " in Mapping-Mode ";
-  greet = greet + Mapping::ActualMap();
-  Cli::start(greet);
-  taskManager.yieldForMicros(5 * 1000 * 1000);
-  SSRSwitcher::setup(500);
-  BatShutOff::setup(1000);
-  Balancer::setup(10000, 3, 2000);
+  pinMode(PB4, OUTPUT);
+  taskManager.scheduleFixedRate(1000, blink);
+  Serial.begin(115200);
+  Serial5.begin(115200);
 }
 
 void loop()
 {
   taskManager.runLoop();
+  if (Serial.available())
+  {                               // If anything comes in Serial (USB),
+    Serial5.write(Serial.read()); // read it and send it out Serial1 (pins 0 & 1)
+  }
+  if (Serial5.available())
+  {                               // If anything comes in Serial1 (pins 0 & 1)
+    Serial.write(Serial5.read()); // read it and send it out Serial (USB)
+  }
 }
