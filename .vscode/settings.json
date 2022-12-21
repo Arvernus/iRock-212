@@ -1,6 +1,20 @@
 {
     "files.associations": {
         "*.yaml": "home-assistant",
-        "algorithm": "cpp"
-    }
+        "algorithm": "cpp",
+        "*.tcc": "cpp",
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp"
+    },
+    "cSpell.words": [
+        "Joscha",
+        "Nebensound",
+        "platformio",
+        "VREF"
+    ]
 }

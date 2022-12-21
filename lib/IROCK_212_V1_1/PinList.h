@@ -8,7 +8,7 @@
 
 // I2C definitions
 #ifndef SERIAL_VE_BUS
-#define SERIAL_VE_BUS SerialLP1
+#define SERIAL_VE_BUS Serial2
 #endif
 
 /*
@@ -59,11 +59,11 @@
     Pin(PinLED1,            PB4,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 1") \
     Pin(PinLED2,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
     Pin(PinLED3,            PD2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
-    Pin(PinPowersave,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersave") \
+    Pin(PinPowersafe,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersafe") \
     Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
     Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
-    Pin(PinVE_Current,      VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt") \
-    Pin(PinVE_Current_S,    VE_CURRENT, VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt smoothed")
+    Pin(PinVE_Current,      NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt") \
+    Pin(PinVE_Current_S,    NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt smoothed")
 // clang-format on
