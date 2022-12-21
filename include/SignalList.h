@@ -72,5 +72,5 @@
   Signal(SSR_Sense,           DigitalInput,         "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
   Signal(PSU_Gate,            DigitalOutput,        "",   1.0,    0.0,      1,    10,     200,      false,  false,  "Driver PSU") \
   Signal(Powersafe,           DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Turn on Powersafe") \
-  Signal(VEBus_Current,       VEDirectInput,        "A",  1.0,    0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
+  Signal(VEBus_Current,       VEDirectInput,        "A",  0.001,  0.0,      0,    10,     200,      false,  false,  "Current read from the VE smart Shunt")
 // clang-format on
