@@ -7,9 +7,7 @@
  */
 
 // I2C definitions
-#ifndef SERIAL_VE_BUS
-#define SERIAL_VE_BUS Serial2
-#endif
+#define SERIAL_VE_BUS 2
 
 /*
  * A Pin is defined by the following parameters:
