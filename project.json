@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/Arvernus/PlatformIOGithubActions/main/schemas/project.json",
   "name": "IROCK_212",
   "version": "0.0.2",
   "description": "iRock OS for Hardware 212",
@@ -10,6 +11,9 @@
     },
     {
       "name": "Andreas Wagner"
+    },
+    {
+      "name": "Donald Dilocker"
     }
   ]
 }

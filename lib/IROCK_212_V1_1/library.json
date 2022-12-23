@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
     "name": "IROCK_212_V1_1",
     "version": "1.0.0",
     "description": "Hardware declaration of iRock 212 V1.1",
