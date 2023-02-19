@@ -37,7 +37,7 @@ void setup()
   taskManager.yieldForMicros(5 * 1000 * 1000);
   SSRSwitcher::setup(500);
   BatShutOff::setup(1000);
-  Balancer::setup(10000, 3, 2000);
+  Balancer::setup(10000, 4, 2000, Balancer::Single);
 }
 
 void loop()
