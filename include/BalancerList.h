@@ -7,10 +7,6 @@
  *
  */
 
-#ifndef BALANCER_ACTIVATION_METHOD
-#define BALANCER_ACTIVATION_METHOD ((Signals::GetAnalogValue(AD_C1) + Signals::GetAnalogValue(AD_C2) + Signals::GetAnalogValue(AD_C3) + Signals::GetAnalogValue(AD_C4)) > 13.5) && !Signals::GetDigitalValue(Status_FinalSO)
-#endif // BALANCER_ACTIVATION_METHOD
-
 /**
  * @brief list of all signals and their max and mins that will trigger final shut off
  *
@@ -22,8 +18,8 @@
 // clang-format off
 //                 ID       BU      Mode        Min     Min_Release Max     Max_Release
 #define BalancerSignalList \
-    BalancerSignal(AD_C1,   BU_C1,  AllCompare, 0.003,  0.003,      0.5,      2) \
-    BalancerSignal(AD_C2,   BU_C2,  AllCompare, 0.003,  0.003,      0.5,      2) \
-    BalancerSignal(AD_C3,   BU_C3,  AllCompare, 0.003,  0.003,      0.5,      2) \
-    BalancerSignal(AD_C4,   BU_C4,  AllCompare, 0.003,  0.003,      0.5,      2)
+    BalancerSignal(AD_C1,   BU_C1,  AllCompare, 0.004,  0.001,      3.6,      3.5) \
+    BalancerSignal(AD_C2,   BU_C2,  AllCompare, 0.004,  0.001,      3.6,      3.5) \
+    BalancerSignal(AD_C3,   BU_C3,  AllCompare, 0.004,  0.001,      3.6,      3.5) \
+    BalancerSignal(AD_C4,   BU_C4,  AllCompare, 0.004,  0.001,      3.6,      3.5)
 // clang-format on
