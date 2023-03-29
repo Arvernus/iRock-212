@@ -49,21 +49,18 @@
     BatShutOffTrigger(AD_C3,            Final,  AllCompare, 2.7,    2.8,        4.0,    4.0) \
     BatShutOffTrigger(AD_C4,            Final,  AllCompare, 2.7,    2.8,        4.0,    4.0) \
     BatShutOffTrigger(VEBus_Current,    Final,  AllCompare, -290.0, 300.0,      300.0,  -290.0) \
-    BatShutOffTrigger(VEBus_Current,    Ocp,    AllCompare, -290.0, -150,       150,    29
-    
-    
-    0)
-    // clang-format on
+    BatShutOffTrigger(VEBus_Current,    Ocp,    AllCompare, -290.0, -150,       150,    290)
+// clang-format on
 
-    /**
-     * @brief list of all signals that will change on trigger
-     * @param SignalID signal id of the Signal
-     * @param ShutOffType defines the type of shut off
-     * @param inverted is signal inverted
-     * @param Lock time in s to lock the Actor after change in ms
-     * @param isSSR defines if Actor is a Solid state relay
-     */
-    // clang-format off
+/**
+ * @brief list of all signals that will change on trigger
+ * @param SignalID signal id of the Signal
+ * @param ShutOffType defines the type of shut off
+ * @param inverted is signal inverted
+ * @param Lock time in s to lock the Actor after change in ms
+ * @param isSSR defines if Actor is a Solid state relay
+ */
+// clang-format off
 //                  ID              Type        inverted
 #define BatShutOffActorList \
     BatShutOffActor(Status_OVP,     Ovp,        false) \
