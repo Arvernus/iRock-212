@@ -1,0 +1,16 @@
+{
+    "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
+    "name": "IROCK_212_V1_11",
+    "version": "1.0.0",
+    "description": "Hardware declaration of iRock 212 V1.11",
+    "authors": [
+        {
+            "name": "Joscha Wagner",
+            "email": "joscha@nebensound.com",
+            "maintainer": true
+        }
+    ],
+    "frameworks": "arduino",
+    "dependencies": [],
+    "platforms": "ststm32"
+}
