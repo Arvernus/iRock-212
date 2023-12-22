@@ -26,7 +26,7 @@
     MapPin(0,   AD_Shunt,           PinV_GND) \
     MapPin(0,   AD_VGnd,            PinV_GND) \
     MapPin(0,   AD_Shunt_FB,        PinFBShunt) \
-    MapPin(0,   AD_Shunt_FB,        AVREF) \
+    MapPin(0,   AD_Shunt_FB,        PinV_GND) \
     MapPin(0,   BU_C1,              PinBU_C1) \
     MapPin(0,   BU_C2,              PinBU_C2) \
     MapPin(0,   BU_C3,              PinBU_C3) \
