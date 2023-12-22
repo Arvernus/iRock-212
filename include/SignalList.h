@@ -48,6 +48,7 @@
   Signal(CPU_TEMP,            CpuTemp,              "C",  1.0,    0.0,      0,    10,     1000,     true,   false,  "Temperature within the CPU") \
   Signal(VREF_INT,            AnalogIntInput,       "V",  1.0,    0.0,      0,    10,     1000,     false,  false,  "Electric potential of the constant voltage source within the processor") \
   Signal(AD_Shunt,            AnalogDiffInput,      "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Sum of the current running in or out of the battery") \
+  Signal(AD_Shunt_FB,         AnalogDiffInput,      "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Shunt in the Feedback line") \
   Signal(Shunt,               DigitalInput,         "",   1.0,    0.0,      0,    10,     10,       false,  false,  "Status of charging") \
   Signal(AD_VGnd,             AnalogInput,          "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Electric potential of virtual ground") \
   Signal(BU_C1,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
@@ -65,6 +66,7 @@
   Signal(Status_LVP,          DigitalOutput,        "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Low Voltage Protection") \
   Signal(Status_FinalSO,      VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Final Shut Off") \
   Signal(Status_OCP,          VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Status of the Over Current Protection") \
+  Signal(Alarm,               VirtualDigitalOutput, "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Alarm Signal") \
   Signal(SSR_Gate,            DigitalOutput,        "",   1.0,    0.0,      0,    10,     0,        false,  false,  "Drives SSR") \
   Signal(SSR_Switch,          VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \
   Signal(SSR_Switch_Ovp,      VirtualDigitalOutput, "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Drives SSR engine") \

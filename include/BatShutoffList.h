@@ -73,5 +73,8 @@
     BatShutoffActor(SSR_Switch,     Final,      true) \
     BatShutoffActor(Status_OCP,     Ocp,        false) \
     BatShutoffActor(SSR_Switch_Ovp, Ovp,        true) \
-    BatShutoffActor(SSR_Switch_Lvp, Lvp,        true)
+    BatShutoffActor(Alarm,          Ovp,        false) \
+    BatShutoffActor(Alarm,          Lvp,        false) \
+    BatShutoffActor(Alarm,          Final,      false) \
+    BatShutoffActor(Alarm,          Ocp,        false)
 // clang-format on

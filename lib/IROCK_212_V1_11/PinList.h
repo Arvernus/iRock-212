@@ -1,7 +1,7 @@
 /**
  * @file PinList.h
  * @author Joscha Wagner (joscha@nebensound.com)
- * @brief Definition of all Pins for iRock V2_3 hardware
+ * @brief Definition of all Pins for iRock 212 V1_11 hardware
  *
  * Copyright (c) Nebensound GmbH 2021
  */
@@ -49,16 +49,17 @@
     Pin(PinAD_C3,           PC3,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 7 voltage") \
     Pin(PinAD_C4,           PC2,        AnalogInputPin,             2.0,    0.0,    false,  false,  "Cell 8 voltage") \
     Pin(PinGPO_LVP,         PA8,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO LVP") \
-    Pin(PinGPO_OVP,         PB12,       DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO UVP") \
+    Pin(PinGPO_OVP,         PC7,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO UVP") \
+    Pin(PinGPO_Alarm,       PC8,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "GPO Alarm") \
     Pin(PinBU_C1,           PB15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 5") \
     Pin(PinBU_C2,           PB2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 6") \
     Pin(PinBU_C3,           PH0,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 7") \
     Pin(PinBU_C4,           PC15,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "BU Cell 8") \
     Pin(PinLED1,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 1") \
     Pin(PinLED2,            PB4,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
-    Pin(PinLED3,            PD5,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
-    Pin(PinPowersafe,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersafe") \
+    Pin(PinLED3,            PB5,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
     Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
+    Pin(PinFBShunt,         PA2,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Feedback Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
     Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
