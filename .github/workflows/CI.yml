@@ -13,3 +13,5 @@ on:
 jobs:
   CI:
     uses: Arvernus/PlatformIOGithubActions/.github/workflows/iRockProjectCI.yaml@main
+    secrets:
+      PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
