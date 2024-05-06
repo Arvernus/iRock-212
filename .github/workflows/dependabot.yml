@@ -1,0 +1,15 @@
+name: PlatformIO Dependabot
+
+on:
+  workflow_dispatch: # option to manually trigger the workflow
+  schedule:
+    # Runs every day at 00:00
+    - cron: '0 0 * * *'
+
+jobs:
+  dependabot:
+    if: ${{ github.ref != 'refs/heads/main' }}  # Führt den Job nicht aus, wenn der Branch 'main' ist
+    uses: Arvernus/PlatformIOGithubActions/.github/workflows/dependabot.yaml@main
+    secrets:
+      PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+    
