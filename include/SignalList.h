@@ -51,14 +51,14 @@
   Signal(AD_Shunt_FB,         AnalogDiffInput,      "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Shunt in the Feedback line") \
   Signal(Shunt,               DigitalInput,         "",   1.0,    0.0,      0,    10,     10,       false,  false,  "Status of charging") \
   Signal(AD_VGnd,             AnalogInput,          "V",  1.0,    0.0,      0,    10,     10,       true,   false,  "Electric potential of virtual ground") \
-  Signal(BU_C1,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 5 - True means unit is working") \
-  Signal(BU_C2,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 6 - True means unit is working") \
-  Signal(BU_C3,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 7 - True means unit is working") \
-  Signal(BU_C4,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 8 - True means unit is working") \
-  Signal(AD_C1,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 5") \
-  Signal(AD_C2,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 6") \
-  Signal(AD_C3,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 7") \
-  Signal(AD_C4,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 8") \
+  Signal(BU_C1,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 1 - True means unit is working") \
+  Signal(BU_C2,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 2 - True means unit is working") \
+  Signal(BU_C3,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 3 - True means unit is working") \
+  Signal(BU_C4,               DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Output for balancing unit 4 - True means unit is working") \
+  Signal(AD_C1,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 1") \
+  Signal(AD_C2,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 2") \
+  Signal(AD_C3,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 3") \
+  Signal(AD_C4,               AnalogInput,          "V",  1.0,    0.0,      0,    3,      10,       true,   false,  "Electric potential of the battery cell 4") \
   Signal(LED1,                DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 1 on PCB") \
   Signal(LED2,                DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 2 on PCB") \
   Signal(LED3,                DigitalOutput,        "",   1.0,    0.0,      1,    10,     0,        false,  false,  "Status LED 3 on PCB") \

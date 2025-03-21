@@ -58,7 +58,7 @@
     Pin(PinLED2,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
     Pin(PinLED3,            PD2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
     Pin(PinPowersafe,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersafe") \
-    Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
+    Pin(PinSSR_Shunt,       PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "SSR-Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
     Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
