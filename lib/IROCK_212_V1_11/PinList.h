@@ -62,6 +62,5 @@
     Pin(PinFBShunt,         PA2,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Feedback Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
-    Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
-    Pin(PinVE_Current,      NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt")
+    Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver")
 // clang-format on
