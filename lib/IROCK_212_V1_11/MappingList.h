@@ -43,5 +43,5 @@
     MapPin(0,   Alarm,              PinGPO_Alarm) \
     MapPin(0,   PSU_Gate,           PinGatePSU) \
     MapPin(0,   SSR_Gate,           PinGate) \
-    MapPin(0,   VEBus_Current,      PinVE_Current)
+    MapPin(0,   Bat_Current,    PinVE_Current)
 // clang-format on

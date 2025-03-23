@@ -40,5 +40,5 @@
     MapPin(0,   Status_LVP,         PinGPO_LVP) \
     MapPin(0,   SSR_Sense,          PinGate2) \
     MapPin(0,   SSR_Gate,           PinGate1) \
-    MapPin(0,   VEBus_Current,      PinVE_Current)
+    MapPin(0,   Bat_Current,        PinVE_Current)
 // clang-format on
