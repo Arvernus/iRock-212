@@ -6,6 +6,9 @@
 #include <BatShutoff.h>
 #include <Balancer.h>
 #include <SSRSwitcher.h>
+#ifdef ENABLE_MODBUS
+#include <ModbusToWorld.h>
+#endif // ENABLE_MODBUS
 
 void blink()
 {
@@ -34,6 +37,7 @@ void setup()
   greet = greet + " in Mapping-Mode ";
   greet = greet + Mapping::ActualMap();
   Cli::start(greet);
+  ModbusToWorld::setup(1, 9600, 100);
   taskManager.yieldForMicros(5 * 1000 * 1000);
   SSRSwitcher::setup(500);
   BatShutoff::setup(1000);
