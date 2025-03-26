@@ -79,12 +79,12 @@
   Signal(VEBus_Current,         VEDirectInput,        "A",  0.001,  0.0,      0,    1000,   1000,     false,  false,  NoRegister,             "Current read from the VE smart Shunt") \
   Signal(Bat_Voltage,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_Voltage,        "Sum Voltage of the Battery") \
   Signal(Bat_Current,           AnalogInput,          "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_Current,        "Sum Current of the Battery") \
-  Signal(Bat_SoC,               AnalogInput,          "%",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_SoC,            "State of Charge of the Battery") \
+  Signal(Bat_SoC,               AnalogInput,          "%",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_SOC,            "State of Charge of the Battery") \
   Signal(Remaining_Cap,         AnalogInput,          "Ah", 1.0,    0.0,      0,    1000,   1000,     false,  false,  Remaining_Capacity,     "Remaining Capacity of the Battery") \
   Signal(Max_Ch_Cur,            AnalogInput,          "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Charge_Current,     "Maximum Charge Current of the Battery") \
   Signal(Max_Disch_Cur,         AnalogInput,          "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Discharge_Current,  "Maximum Discharge Current of the Battery") \
-  Signal(Max_Bat_Vol,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Battery_Voltage,    "Maximum Voltage of the Battery") \
-  Signal(Min_Bat_Vol,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Min_Battery_Voltage,    "Minimum Voltage of the Battery")
+  Signal(Max_Bat_Vol,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Cell_Voltage,    "Maximum Voltage of the Battery") \
+  Signal(Min_Bat_Vol,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Min_Cell_Voltage,    "Minimum Voltage of the Battery")
 #else
 //       SignalName             SignalType            Unit  Gain    Offset    Init  Smooth  Interval  Cal     Generic Description
 #define SignalList \
