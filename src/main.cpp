@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include "main.h"
 #include <TaskManager.h>
+#include <PersistentStorage.h>
 #include <MappingIO.h>
 #include <CLI.h>
 #include <BatShutoff.h>
@@ -9,6 +10,9 @@
 #ifdef ENABLE_MODBUS
 #include <ModbusToWorld.h>
 #endif // ENABLE_MODBUS
+
+// Set Serialnumber
+#define SET_SERIAL_NUMBER 1234567
 
 void blink()
 {
@@ -23,18 +27,36 @@ void setup()
 {
   Cli::setup(115200, true, true, true, true);
   Signals::Init();
-  // ModBus::setup();
   blink();
-  String greet;
-  greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
+  {
 #define stringer(s) #s
 #define str(s) stringer(s)
-  greet = greet + str(SW_VERSION);
-  greet = greet + " on your iRock 212 ";
-  greet = greet + str(HW_VERSION);
+#define DEVELOPERVERSION Develop
+    char HardwareVersion[16] = str(HW_VERSION);
+    Store::forbidden_write("HW_V", HardwareVersion, true);
+#ifdef SET_SERIAL_NUMBER
+    char SerialNumber[8] = str(SET_SERIAL_NUMBER);
+    Store::forbidden_write("SN", SerialNumber, true);
+#endif // SET_SERIAL_NUMBER
+    char HardwareName[16] = "iRock 212";
+    Store::forbidden_write("HW_N", HardwareName, true);
+  }
+  char SoftwareVersion[16] = str(SW_VERSION);
+#undef DEVELOPERVERSION
 #undef str
 #undef stringer
-  greet = greet + " in Mapping-Mode ";
+  String greet;
+  char HardwareVersion[16];
+  Store::read(HardwareVersion, "HW_V");
+  char HardwareName[16];
+  Store::read(HardwareName, "HW_N");
+  greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
+  greet = greet + SoftwareVersion;
+  greet = greet + " on your ";
+  greet = greet + HardwareName;
+  greet = greet + " (V";
+  greet = greet + HardwareVersion;
+  greet = greet + ") in Mapping-Mode ";
   greet = greet + Mapping::ActualMap();
   Cli::start(greet);
   ModbusToWorld::setup(1, 9600, 100);
