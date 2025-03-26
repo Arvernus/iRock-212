@@ -7,16 +7,15 @@
  *
  */
 #ifndef HW_VERSION
-#ifdef HW_VERSION_2_4
+#if defined(HW_VERSION_2_4)
 #define HW_VERSION 2.4
-#endif // HW_VERSION_2_4
-#ifdef HW_VERSION_1_11
+#elif defined(HW_VERSION_1_11)
 #define HW_VERSION 1.11
-#endif // HW_VERSION_1_11
-#ifdef HW_VERSION_1_1
+#elif defined(HW_VERSION_1_1)
 #define HW_VERSION 1.1
-#endif // HW_VERSION_1_1
-#ifdef HW_VERSION_1_0
+#elif defined(HW_VERSION_1_0)
 #define HW_VERSION 1.0
-#endif // HW_VERSION_1_0
+#else
+#define HW_VERSION 0.0
+#endif // HW_VERSION_TAG
 #endif // HW_VERSION

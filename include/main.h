@@ -7,7 +7,7 @@
  *
  */
 #pragma once
+#include "HardwareVersion.h"
 #ifndef SW_VERSION
 #define SW_VERSION DEVELOPERVERSION
 #endif // SW_VERSION
-#include <HardwareVersion.h>
