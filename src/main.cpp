@@ -56,6 +56,8 @@ void setup()
   Store::read(HardwareVersion, "HW_V");
   char HardwareName[16];
   Store::read(HardwareName, "HW_N");
+  char SerialNumber[8];
+  Store::read(SerialNumber, "SN");
   greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
   greet = greet + SoftwareVersion;
   greet = greet + " on your ";
@@ -64,6 +66,9 @@ void setup()
   greet = greet + HardwareVersion;
   greet = greet + ") in Mapping-Mode ";
   greet = greet + Mapping::ActualMap();
+  greet = greet + "\nSerialnumber: ";
+  greet = greet + SerialNumber;
+
   Cli::start(greet);
   ModbusToWorld::setup(1, 9600, 100);
   taskManager.yieldForMicros(5 * 1000 * 1000);
