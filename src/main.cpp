@@ -12,7 +12,10 @@
 #endif // ENABLE_MODBUS
 
 // Set Serialnumber
-#define SET_SERIAL_NUMBER 1234567
+// #define SET_SERIAL_NUMBER 1234567
+
+// Reset Filesystem
+// #define RESET_FILESYSTEM
 
 void blink()
 {
@@ -32,6 +35,9 @@ void setup()
 #define stringer(s) #s
 #define str(s) stringer(s)
 #define DEVELOPERVERSION Develop
+#ifdef RESET_FILESYSTEM
+    Store::reset(true);
+#endif // RESET_FILESYSTEM
     char HardwareVersion[16] = str(HW_VERSION);
     Store::forbidden_write("HW_V", HardwareVersion, true);
 #ifdef SET_SERIAL_NUMBER
