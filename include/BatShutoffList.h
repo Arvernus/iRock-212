@@ -50,8 +50,8 @@
     BatShutoffTrigger(AD_C2,            Final,  AllCompare, 2.8,    3.2,        3.85,   3.7) \
     BatShutoffTrigger(AD_C3,            Final,  AllCompare, 2.8,    3.2,        3.85,   3.7) \
     BatShutoffTrigger(AD_C4,            Final,  AllCompare, 2.8,    3.2,        3.85,   3.7) \
-    BatShutoffTrigger(Bat_Current,      Final,  AllCompare, -250.0, -200.0,     250.0,  200.0) \
-    BatShutoffTrigger(Bat_Current,      Ocp,    AllCompare, -150.0, -140,       150,    140)
+    BatShutoffTrigger(AD_Shunt,         Final,  AllCompare, -250.0, -200.0,     250.0,  200.0) \
+    BatShutoffTrigger(AD_Shunt,         Ocp,    AllCompare, -150.0, -140,       150,    140)
 // clang-format on
 
 /**
