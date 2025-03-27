@@ -38,26 +38,22 @@ void setup()
 #ifdef RESET_FILESYSTEM
     Store::reset(true);
 #endif // RESET_FILESYSTEM
-    char HardwareVersion[16] = str(HW_VERSION);
-    Store::forbidden_write("HW_V", HardwareVersion, true);
 #ifdef SET_SERIAL_NUMBER
-    char SerialNumber[8] = str(SET_SERIAL_NUMBER);
-    Store::forbidden_write("SN", SerialNumber, true);
+    char initSerialNumber[8] = str(SET_SERIAL_NUMBER);
+    Store::forbidden_write("SN", initSerialNumber);
 #endif // SET_SERIAL_NUMBER
-    char HardwareName[16] = "iRock 212";
-    Store::forbidden_write("HW_N", HardwareName, true);
   }
   char SoftwareVersion[16] = str(SW_VERSION);
+  char HardwareVersion[sizeof(str(HW_VERSION))];
+  char HardwareName[sizeof(str(HW_NAME))];
 #undef DEVELOPERVERSION
 #undef str
 #undef stringer
   String greet;
-  char HardwareVersion[16];
-  Store::read(HardwareVersion, "HW_V");
-  char HardwareName[16];
-  Store::read(HardwareName, "HW_N");
+  Store::read("HW_V", HardwareVersion);
+  Store::read("HW_N", HardwareName);
   char SerialNumber[8];
-  Store::read(SerialNumber, "SN");
+  Store::read("SN", SerialNumber);
   greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
   greet = greet + SoftwareVersion;
   greet = greet + " on your ";
