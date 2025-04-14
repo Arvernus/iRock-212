@@ -12,10 +12,10 @@
 #endif // ENABLE_MODBUS
 
 // Set Serialnumber
-#define SET_SERIAL_NUMBER 2512119
+// #define SET_SERIAL_NUMBER 2512119
 
 // Reset Filesystem
-#define RESET_FILESYSTEM
+// #define RESET_FILESYSTEM
 
 void blink()
 {
@@ -25,7 +25,35 @@ void blink()
   Signals::SetDigitalValue(LED3, !Signals::GetDigitalValue(LED3));
   taskManager.scheduleOnce(time, blink);
 }
+void calculateSoc()
+{
+  float voltage = Signals::GetAnalogValue(Signals::SignalId::Bat_Voltage) / float(NUMBER_OF_CELLS);
 
+  float Soc;
+
+  if (voltage < 3.25)
+  {
+    Soc = 0.0;
+  }
+  else if (voltage > 3.4)
+  {
+    Soc = 100.0;
+  }
+  else
+  {
+    Soc = ((voltage - 3.25) / 0.15) * 100;
+  }
+  Signals::SetAnalogValue(Signals::SignalId::Bat_SoC, Soc);
+}
+void calculateBatteryVoltage()
+{
+  float voltage = 0;
+  voltage = voltage + Signals::GetAnalogValue(Signals::SignalId::AD_C1);
+  voltage = voltage + Signals::GetAnalogValue(Signals::SignalId::AD_C2);
+  voltage = voltage + Signals::GetAnalogValue(Signals::SignalId::AD_C3);
+  voltage = voltage + Signals::GetAnalogValue(Signals::SignalId::AD_C4);
+  Signals::SetAnalogValue(Signals::SignalId::Bat_Voltage, voltage);
+}
 void setup()
 {
   Cli::setup(115200, true, true, true, true);
@@ -38,20 +66,16 @@ void setup()
 #ifdef RESET_FILESYSTEM
     Store::reset(true);
 #endif // RESET_FILESYSTEM
-    char HardwareVersion[16] = str(HW_VERSION);
-    Store::forbidden_write("HW_V", HardwareVersion, true);
+    char newHardwareVersion[16] = str(HW_VERSION);
+    Store::forbidden_write("HW_V", newHardwareVersion, true);
 #ifdef SET_SERIAL_NUMBER
-    char SerialNumber[8] = str(SET_SERIAL_NUMBER);
-    Store::forbidden_write("SN", SerialNumber, true);
     char initSerialNumber[8] = str(SET_SERIAL_NUMBER);
     Store::forbidden_write("SN", initSerialNumber);
 #endif // SET_SERIAL_NUMBER
-    char HardwareName[16] = "iRock 212";
-    Store::forbidden_write("HW_N", HardwareName, true);
+    char newHardwareName[16] = "iRock 212";
+    Store::forbidden_write("HW_N", newHardwareName, true);
   }
   char SoftwareVersion[16] = str(SW_VERSION);
-  char HardwareVersion[sizeof(str(HW_VERSION))];
-  char HardwareName[sizeof(str(HW_NAME))];
 #undef DEVELOPERVERSION
 #undef str
 #undef stringer
@@ -64,7 +88,8 @@ void setup()
   Store::read("HW_N", HardwareName);
   char SerialNumber[8];
   Store::read(SerialNumber, "SN");
-  Store::read("SN", SerialNumber);
+  float capacity;
+  Store::read("Cap", capacity);
   greet = "### Welcome to iRock ###\nYou are running, iRock OS ";
   greet = greet + SoftwareVersion;
   greet = greet + " on your ";
@@ -75,11 +100,15 @@ void setup()
   greet = greet + Mapping::ActualMap();
   greet = greet + "\nSerialnumber: ";
   greet = greet + SerialNumber;
+  greet = greet + "\nCapacity: ";
+  greet = greet + capacity;
   Cli::start(greet);
   taskManager.yieldForMicros(5 * 1000 * 1000);
   SSRSwitcher::setup(500);
   BatShutoff::setup(1000);
   Balancer::setup(10000, 4, 2000, Balancer::Single);
+  taskManager.scheduleFixedRate(1000, calculateBatteryVoltage);
+  taskManager.scheduleFixedRate(1000, calculateSoc);
 }
 
 void loop()
