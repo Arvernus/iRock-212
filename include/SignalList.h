@@ -125,6 +125,8 @@
   Signal(SSR_Sense,             DigitalInput,         "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Senses SSR") \
   Signal(PSU_Gate,              DigitalOutput,        "",   1.0,    0.0,      1,    10,     200,      false,  false,  "Driver PSU") \
   Signal(Powersafe,             DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  "Turn on Powersafe") \
+  Signal(Bat_Voltage,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  "Sum Voltage of the Battery") \
+  Signal(Bat_SoC,               AnalogInput,          "%",  1.0,    0.0,      0,    1000,   1000,     false,  false,  "State of Charge of the Battery") \
   Signal(Bat_Current,           VEDirectInput,        "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  "Sum Current of the Battery")
 #endif // HW_VERSION_2_4 || HW_VERSION_1_11
 // clang-format on

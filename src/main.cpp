@@ -25,6 +25,7 @@ void blink()
   Signals::SetDigitalValue(LED3, !Signals::GetDigitalValue(LED3));
   taskManager.scheduleOnce(time, blink);
 }
+
 void calculateSoc()
 {
   float voltage = Signals::GetAnalogValue(Signals::SignalId::Bat_Voltage) / float(NUMBER_OF_CELLS);
