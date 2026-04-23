@@ -18,8 +18,8 @@
 // clang-format off
 //                 ID       BU      Mode        Min     Min_Release Max     Max_Release
 #define BalancerSignalList \
-    BalancerSignal(AD_C1,   BU_C1,  AllCompare, 0.004,  0.001,      3.57,      3.5) \
-    BalancerSignal(AD_C2,   BU_C2,  AllCompare, 0.004,  0.001,      3.57,      3.5) \
-    BalancerSignal(AD_C3,   BU_C3,  AllCompare, 0.004,  0.001,      3.57,      3.5) \
-    BalancerSignal(AD_C4,   BU_C4,  AllCompare, 0.004,  0.001,      3.57,      3.5)
+    BalancerSignal(AD_C1,   BU_C1,  AllCompare, 0.004,  0.001,      3.55,      3.5) \
+    BalancerSignal(AD_C2,   BU_C2,  AllCompare, 0.004,  0.001,      3.55,      3.5) \
+    BalancerSignal(AD_C3,   BU_C3,  AllCompare, 0.004,  0.001,      3.55,      3.5) \
+    BalancerSignal(AD_C4,   BU_C4,  AllCompare, 0.004,  0.001,      3.55,      3.5)
 // clang-format on

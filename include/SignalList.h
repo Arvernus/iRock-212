@@ -77,13 +77,13 @@
   Signal(PSU_Gate,              DigitalOutput,        "",   1.0,    0.0,      1,    10,     200,      false,  false,  NoRegister,                   "Driver PSU") \
   Signal(Powersafe,             DigitalOutput,        "",   1.0,    0.0,      0,    10,     200,      false,  false,  NoRegister,                   "Turn on Powersafe") \
   Signal(VEBus_Current,         VEDirectInput,        "A",  0.001,  0.0,      0,    1000,   1000,     false,  false,  NoRegister,                   "Current read from the VE smart Shunt") \
-  Signal(Bat_Voltage,           AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_Voltage,              "Sum Voltage of the Battery") \
-  Signal(Bat_SoC,               AnalogInput,          "%",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Battery_SOC,                  "State of Charge of the Battery") \
-  Signal(Remaining_Cap,         AnalogInput,          "Ah", 1.0,    0.0,      0,    1000,   1000,     false,  false,  Remaining_Capacity,           "Remaining Capacity of the Battery") \
-  Signal(Max_Ch_Cur,            AnalogInput,          "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Charge_Current,           "Maximum Charge Current of the Battery") \
-  Signal(Max_Disch_Cur,         AnalogInput,          "A",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Discharge_Current,        "Maximum Discharge Current of the Battery") \
-  Signal(Max_Cell_Vol,          AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Max_Cell_Voltage,             "Maximum Voltage of the Battery") \
-  Signal(Min_Cell_Vol,          AnalogInput,          "V",  1.0,    0.0,      0,    1000,   1000,     false,  false,  Min_Cell_Voltage,             "Minimum Voltage of the Battery") \
+  Signal(AD_C_All,              VirtualAnalogOutput,  "V",  1.0,    0.0,      3*4,  3,      0,        false,  false,  Battery_Voltage,              "Sum Voltage of the Battery") \
+  Signal(Soc,                   VirtualAnalogOutput,  "%",  1.0,    0.0,      50,   3,      0,        false,  false,  Battery_SOC,                  "State of Charge of the Battery") \
+  Signal(Remaining_Cap,         VirtualAnalogOutput,  "Ah", 1.0,    0.0,      0,    1000,   0,        false,  false,  Remaining_Capacity,           "Remaining Capacity of the Battery") \
+  Signal(Max_Ch_Cur,            VirtualAnalogOutput,  "A",  1.0,    0.0,      0,    1000,   0,        false,  false,  Max_Charge_Current,           "Maximum Charge Current of the Battery") \
+  Signal(Max_Disch_Cur,         VirtualAnalogOutput,  "A",  1.0,    0.0,      0,    1000,   0,        false,  false,  Max_Discharge_Current,        "Maximum Discharge Current of the Battery") \
+  Signal(Max_Cell_Vol,          VirtualAnalogOutput,  "V",  1.0,    0.0,      0,    1000,   0,        false,  false,  Max_Cell_Voltage,             "Maximum Voltage of the Battery") \
+  Signal(Min_Cell_Vol,          VirtualAnalogOutput,  "V",  1.0,    0.0,      0,    1000,   0,        false,  false,  Min_Cell_Voltage,             "Minimum Voltage of the Battery") \
   Signal(L_Vol_Wa,              VirtualDigitalOutput, "",   1.0,    0.0,      0,    1000,   1000,     false,  false,  Low_Voltage_Alarm,            "Low Voltage Warning") \
   Signal(H_Vol_Wa,              VirtualDigitalOutput, "",   1.0,    0.0,      0,    1000,   1000,     false,  false,  High_Voltage_Alarm,           "High Voltage Warning") \
   Signal(L_CVol_Wa,             VirtualDigitalOutput, "",   1.0,    0.0,      0,    1000,   1000,     false,  false,  Low_Cell_Voltage_Alarm,       "Low Cell Voltage Warning") \
