@@ -12,6 +12,9 @@
  */
 #pragma once
 
+#ifndef HW_VERSION_1_0
+#define HW_VERSION_1_0
+#endif
 /*----------------------------------------------------------------------------
  *        Pins
  *----------------------------------------------------------------------------*/
@@ -147,6 +150,9 @@
 #ifndef PIN_SERIAL_TX
 #define PIN_SERIAL_TX PA9
 #endif
+
+// Modbus Definitions
+#define NUMBER_OF_CELLS 4
 
 /* Extra HAL modules */
 #if !defined(HAL_DAC_MODULE_DISABLED)

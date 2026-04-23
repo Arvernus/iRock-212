@@ -25,6 +25,8 @@
     MapPin(0,   AD_Shunt,           PinSSR_Shunt) \
     MapPin(0,   AD_Shunt,           PinV_GND) \
     MapPin(0,   AD_VGnd,            PinV_GND) \
+    MapPin(0,   AD_Shunt_FB,        PinFBShunt) \
+    MapPin(0,   AD_Shunt_FB,        PinV_GND) \
     MapPin(0,   BU_C1,              PinBU_C1) \
     MapPin(0,   BU_C2,              PinBU_C2) \
     MapPin(0,   BU_C3,              PinBU_C3) \
@@ -38,7 +40,7 @@
     MapPin(0,   LED3,               PinLED3) \
     MapPin(0,   Status_OVP,         PinGPO_OVP) \
     MapPin(0,   Status_LVP,         PinGPO_LVP) \
-    MapPin(0,   SSR_Sense,          PinGate2) \
-    MapPin(0,   SSR_Gate,           PinGate1) \
-    MapPin(0,   Bat_Current,        PinVE_Current)
+    MapPin(0,   Alarm,              PinGPO_Alarm) \
+    MapPin(0,   PSU_Gate,           PinGatePSU) \
+    MapPin(0,   SSR_Gate,           PinGate)
 // clang-format on

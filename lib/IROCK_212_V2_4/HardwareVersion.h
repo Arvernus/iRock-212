@@ -3,8 +3,8 @@
  * @author Joscha Wagner (joscha@nebensound.com)
  * @brief Defines the Hardwareversion of the board.
  *
- * Copyright (c) Nebensound GmbH 2021
+ * Copyright (c) Nebensound GmbH 2025
  *
  */
 #pragma once
-#define HW_VERSION 1.1
+#define HW_VERSION 2.4

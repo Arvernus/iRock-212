@@ -12,8 +12,8 @@
  */
 #pragma once
 
-#ifndef HW_VERSION_1_1
-#define HW_VERSION_1_1
+#ifndef HW_VERSION_2_4
+#define HW_VERSION_2_4
 #endif
 /*----------------------------------------------------------------------------
  *        Pins
@@ -151,7 +151,33 @@
 #define PIN_SERIAL_TX PA9
 #endif
 
+#define ENABLE_HWSERIAL2
+#ifndef PIN_SERIAL2_RX
+#define PIN_SERIAL2_RX PB11
+#endif
+#ifndef PIN_SERIAL2_TX
+#define PIN_SERIAL2_TX PB10
+#endif
+
+// RS485 Definitions
+#ifndef RS485_SERIAL_PORT
+#define RS485_SERIAL_PORT Serial2
+#endif
+#ifndef PIN_RS485_RX
+#define PIN_RS485_RX PIN_SERIAL2_RX
+#endif
+#ifndef PIN_RS485_TX
+#define PIN_RS485_TX PIN_SERIAL2_TX
+#endif
+#ifndef PIN_RS485_DE_RE
+#define PIN_RS485_DE_RE PB14
+#endif
+#ifndef PIN_RS485_CTS
+#define PIN_RS485_CTS PB13
+#endif
+
 // Modbus Definitions
+#define ENABLE_MODBUS 1
 #define NUMBER_OF_CELLS 4
 
 /* Extra HAL modules */

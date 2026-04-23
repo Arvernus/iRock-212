@@ -9,9 +9,19 @@
         "istream": "cpp",
         "limits": "cpp",
         "sstream": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "atomic": "cpp",
+        "compare": "cpp",
+        "cstdint": "cpp",
+        "*.tpp": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     },
     "cSpell.words": [
+        "IROCK",
         "Joscha",
         "Nebensound",
         "platformio",

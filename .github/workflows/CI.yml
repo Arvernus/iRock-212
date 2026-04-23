@@ -13,3 +13,8 @@ on:
 jobs:
   CI:
     uses: Arvernus/PlatformIOGithubActions/.github/workflows/iRockProjectCI.yaml@main
+    secrets:
+      PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+    with:
+      prerelease: ${{ github.ref != 'refs/heads/main' }}
+      release_only_on_main: false

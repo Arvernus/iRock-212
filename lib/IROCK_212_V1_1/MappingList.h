@@ -22,7 +22,7 @@
     MapPin(0,   MapVar,             PinDip3) \
     MapPin(0,   MapVar,             PinDip2) \
     MapPin(0,   MapVar,             PinDip1) \
-    MapPin(0,   AD_Shunt,           PinShunt) \
+    MapPin(0,   AD_Shunt,           PinSSR_Shunt) \
     MapPin(0,   AD_Shunt,           PinV_GND) \
     MapPin(0,   AD_VGnd,            PinV_GND) \
     MapPin(0,   BU_C1,              PinBU_C1) \
@@ -41,5 +41,5 @@
     MapPin(0,   PSU_Gate,           PinGatePSU) \
     MapPin(0,   SSR_Gate,           PinGate) \
     MapPin(0,   Powersafe,          PinPowersafe) \
-    MapPin(0,   VEBus_Current,      PinVE_Current)
+    MapPin(0,   Bat_Current,        PinVE_Current)
 // clang-format on

@@ -1,15 +1,13 @@
 /**
  * @file PinList.h
  * @author Joscha Wagner (joscha@nebensound.com)
- * @brief Definition of all Pins for iRock V2_3 hardware
+ * @brief Definition of all Pins for iRock 212 V1_1 hardware
  *
  * Copyright (c) Nebensound GmbH 2021
  */
 
 // I2C definitions
-#ifndef SERIAL_VE_BUS
-#define SERIAL_VE_BUS Serial2
-#endif
+#define SERIAL_VE_BUS 2
 
 /*
  * A Pin is defined by the following parameters:
@@ -60,10 +58,9 @@
     Pin(PinLED2,            PB3,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 2") \
     Pin(PinLED3,            PD2,        DigitalOutputPin,           1.0,    0.0,    false,  false,  "LED 3") \
     Pin(PinPowersafe,       PC9,        DigitalOutputPin,           1.0,    0.0,    true,   false,  "Powersafe") \
-    Pin(PinShunt,           PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Shunt") \
+    Pin(PinSSR_Shunt,       PC0,        AnalogInputPin,             1.0,    0.0,    false,  false,  "SSR-Shunt") \
     Pin(PinV_GND,           PC1,        AnalogInputPin,             1.0,    0.0,    false,  false,  "Virtual Ground") \
     Pin(PinGate,            PC13,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate Driver") \
     Pin(PinGatePSU,         PC14,       DigitalOutputPin,           1.0,    0.0,    false,  false,  "Gate PSU Driver") \
-    Pin(PinVE_Current,      NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt") \
-    Pin(PinVE_Current_S,    NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt smoothed")
+    Pin(PinVE_Current,      NoPin,      VEDirectPin,                1.0,    0.0,    false,  false,  "Current from VE Shunt")
 // clang-format on
